@@ -1,58 +1,32 @@
 'use client';
 
 import { motion } from 'framer-motion';
-import { GraduationCap, Target, BookOpen, Award, Users, Lightbulb, CheckCircle } from 'lucide-react';
+import { GraduationCap, Award, Target, Lightbulb, MapPin, Calendar, User } from 'lucide-react';
 
 const About = () => {
-  const highlights = [
-    {
-      icon: GraduationCap,
-      title: 'Fresh Graduate',
-      description: 'Bachelor of Engineering in Civil Engineering with strong academic foundation'
-    },
-    {
-      icon: Award,
-      title: 'NEC Registered',
-      description: 'Licensed Civil Engineer with Nepal Engineering Council Registration #85377'
-    },
+  const stats = [
+    { label: 'Education', value: 'B.E. Civil Engineering', icon: GraduationCap },
+    { label: 'Registration', value: 'NEC #85377', icon: Award },
+    { label: 'Location', value: 'Kathmandu, Nepal', icon: MapPin },
+    { label: 'Year', value: '2024 Graduate', icon: Calendar }
+  ];
+
+  const values = [
     {
       icon: Target,
-      title: 'Goal-Oriented',
-      description: 'Focused on sustainable infrastructure development and innovative construction'
+      title: 'Precision',
+      description: 'Committed to accuracy in design and execution'
     },
     {
       icon: Lightbulb,
-      title: 'Innovation Minded',
-      description: 'Passionate about modern construction techniques and green building practices'
-    }
-  ];
-
-  const strengths = [
-    {
-      icon: BookOpen,
-      title: 'Academic Excellence',
-      description: 'Strong theoretical foundation in structural analysis and design principles',
-      percentage: 95
+      title: 'Innovation',
+      description: 'Embracing modern construction technologies'
     },
     {
-      icon: Users,
-      title: 'Team Collaboration',
-      description: 'Excellent communication skills and ability to work in multidisciplinary teams',
-      percentage: 88
-    },
-    {
-      icon: Target,
-      title: 'Problem Solving',
-      description: 'Analytical mindset with focus on practical and cost-effective solutions',
-      percentage: 92
+      icon: Award,
+      title: 'Quality',
+      description: 'Delivering excellence in every project'
     }
-  ];
-
-  const objectives = [
-    'Apply academic knowledge to real-world infrastructure projects',
-    'Contribute to sustainable construction and green building practices',
-    'Develop expertise in project management and team leadership',
-    'Support Nepal\'s infrastructure development and modernization'
   ];
 
   return (
@@ -67,113 +41,104 @@ const About = () => {
           className="text-center mb-16"
         >
           <div className="badge mb-4">
-            <Award className="w-4 h-4 mr-2" />
-            About Me
+            <User className="w-4 h-4 mr-2" />
+            Background
           </div>
           
           <h2 className="heading-lg mb-6">
-            Professional <span className="text-gradient">Profile</span>
+            About <span className="text-gradient">Me</span>
           </h2>
           
           <p className="text-lead max-w-3xl mx-auto">
-            Recent Civil Engineering graduate with passion for infrastructure development, 
-            sustainable construction practices, and innovative engineering solutions.
+            Civil Engineering ready to contribute to infrastructure 
+            development with modern techniques and sustainable practices.
           </p>
         </motion.div>
 
+        {/* Stats Grid */}
+        <motion.div
+          initial={{ opacity: 0, y: 30 }}
+          whileInView={{ opacity: 1, y: 0 }}
+          transition={{ duration: 0.8 }}
+          viewport={{ once: true }}
+          className="grid grid-cols-2 lg:grid-cols-4 gap-6 mb-16"
+        >
+          {stats.map((stat, index) => (
+            <motion.div
+              key={stat.label}
+              initial={{ opacity: 0, y: 20 }}
+              whileInView={{ opacity: 1, y: 0 }}
+              transition={{ duration: 0.6, delay: index * 0.1 }}
+              viewport={{ once: true }}
+              className="card p-6 text-center group hover:shadow-lg transition-all duration-300"
+            >
+              <div className="w-12 h-12 accent-gradient rounded-xl flex items-center justify-center mx-auto mb-4 group-hover:scale-110 transition-transform duration-300">
+                <stat.icon className="w-6 h-6 text-white" />
+              </div>
+              <div className="text-sm text-gray-500 mb-1">{stat.label}</div>
+              <div className="font-bold text-gray-900">{stat.value}</div>
+            </motion.div>
+          ))}
+        </motion.div>
+
         {/* Main Content */}
-        <div className="grid-responsive-2 mb-20">
-          {/* Left - Story */}
+        <div className="grid-responsive-2 mb-16">
+          {/* Professional Summary */}
           <motion.div
             initial={{ opacity: 0, x: -30 }}
             whileInView={{ opacity: 1, x: 0 }}
             transition={{ duration: 0.8 }}
             viewport={{ once: true }}
-            className="space-content"
           >
             <div className="card p-8">
-              <h3 className="heading-md mb-6">My Journey</h3>
+              <h3 className="heading-md mb-6">Professional Summary</h3>
               
-              <div className="space-y-6 text-gray-700">
-                <p className="leading-relaxed">
-                  As a recent graduate in Civil Engineering, I bring fresh perspectives and 
-                  up-to-date knowledge of modern construction techniques, sustainable practices, 
-                  and digital tools used in today's engineering industry.
+              <div className="space-y-4 text-gray-700 leading-relaxed">
+                <p>
+                  Civil Engineering graduate with comprehensive knowledge of structural 
+                  design, construction management, and sustainable building practices. 
                 </p>
                 
-                <p className="leading-relaxed">
-                  During my academic journey, I developed strong foundations in structural analysis, 
-                  project management, and construction materials. I'm particularly interested in 
-                  sustainable infrastructure development and green building technologies.
+                <p>
+                  Equipped with modern engineering tools including AutoCAD, ARC GIS, and 
+                  project management software. Passionate about contributing to Nepal's 
+                  infrastructure development through innovative and sustainable solutions.
                 </p>
                 
-                <p className="leading-relaxed">
-                  I'm eager to apply my theoretical knowledge to real-world projects and contribute 
-                  to Nepal's infrastructure development while learning from experienced professionals.
+                <p>
+                  Ready to apply academic knowledge to real-world challenges while 
+                  continuously learning from industry professionals.
                 </p>
-              </div>
-
-              <div className="mt-8">
-                <h4 className="text-lg font-semibold text-gray-900 mb-4">Career Objectives</h4>
-                <ul className="space-y-3">
-                  {objectives.map((objective, index) => (
-                    <motion.li
-                      key={index}
-                      initial={{ opacity: 0, x: -20 }}
-                      whileInView={{ opacity: 1, x: 0 }}
-                      transition={{ duration: 0.6, delay: index * 0.1 }}
-                      viewport={{ once: true }}
-                      className="flex items-start gap-3"
-                    >
-                      <CheckCircle className="w-5 h-5 text-blue-600 mt-0.5 flex-shrink-0" />
-                      <span className="text-gray-700">{objective}</span>
-                    </motion.li>
-                  ))}
-                </ul>
               </div>
             </div>
           </motion.div>
 
-          {/* Right - Strengths */}
+          {/* Core Values */}
           <motion.div
             initial={{ opacity: 0, x: 30 }}
             whileInView={{ opacity: 1, x: 0 }}
             transition={{ duration: 0.8, delay: 0.2 }}
             viewport={{ once: true }}
-            className="space-content"
           >
             <div className="card p-8">
-              <h3 className="heading-md mb-8">Core Strengths</h3>
+              <h3 className="heading-md mb-8">Core Values</h3>
               
-              <div className="space-y-8">
-                {strengths.map((strength, index) => (
+              <div className="space-y-6">
+                {values.map((value, index) => (
                   <motion.div
-                    key={strength.title}
+                    key={value.title}
                     initial={{ opacity: 0, y: 20 }}
                     whileInView={{ opacity: 1, y: 0 }}
                     transition={{ duration: 0.6, delay: index * 0.2 }}
                     viewport={{ once: true }}
-                    className="space-y-4"
+                    className="flex items-start gap-4"
                   >
-                    <div className="flex items-center gap-4">
-                      <div className="w-12 h-12 accent-gradient rounded-xl flex items-center justify-center">
-                        <strength.icon className="w-6 h-6 text-white" />
-                      </div>
-                      <div className="flex-1">
-                        <h4 className="text-lg font-semibold text-gray-900 mb-1">{strength.title}</h4>
-                        <p className="text-gray-600 text-sm">{strength.description}</p>
-                      </div>
-                      <div className="text-xl font-bold text-blue-600">{strength.percentage}%</div>
+                    <div className="w-10 h-10 accent-gradient rounded-lg flex items-center justify-center flex-shrink-0">
+                      <value.icon className="w-5 h-5 text-white" />
                     </div>
-                    
-                    <div className="skill-bar">
-                      <motion.div
-                        initial={{ width: 0 }}
-                        whileInView={{ width: `${strength.percentage}%` }}
-                        transition={{ duration: 1.5, delay: index * 0.3 }}
-                        viewport={{ once: true }}
-                        className="skill-progress"
-                      />
+                    <div>
+                      <h4 className="font-semibold text-gray-900 mb-1">{value.title}</h4>
+                      <p className="text-gray-600 text-sm">{value.description}</p>
                     </div>
                   </motion.div>
                 ))}
@@ -182,39 +147,7 @@ const About = () => {
           </motion.div>
         </div>
 
-        {/* Highlights Grid */}
-        <motion.div
-          initial={{ opacity: 0, y: 30 }}
-          whileInView={{ opacity: 1, y: 0 }}
-          transition={{ duration: 0.8 }}
-          viewport={{ once: true }}
-          className="grid-responsive mb-16"
-        >
-          {highlights.map((highlight, index) => (
-            <motion.div
-              key={highlight.title}
-              initial={{ opacity: 0, y: 30 }}
-              whileInView={{ opacity: 1, y: 0 }}
-              transition={{ duration: 0.6, delay: index * 0.1 }}
-              viewport={{ once: true }}
-              className="card-featured p-8 text-center group"
-            >
-              <div className="w-16 h-16 accent-gradient rounded-2xl flex items-center justify-center mx-auto mb-6 group-hover:scale-110 transition-transform duration-300">
-                <highlight.icon className="w-8 h-8 text-white" />
-              </div>
-              
-              <h3 className="text-xl font-bold text-gray-900 mb-3">
-                {highlight.title}
-              </h3>
-              
-              <p className="text-gray-600 leading-relaxed">
-                {highlight.description}
-              </p>
-            </motion.div>
-          ))}
-        </motion.div>
-
-        {/* Professional Statement */}
+        {/* Mission Statement */}
         <motion.div
           initial={{ opacity: 0, y: 30 }}
           whileInView={{ opacity: 1, y: 0 }}
@@ -222,20 +155,20 @@ const About = () => {
           viewport={{ once: true }}
           className="text-center"
         >
-          <div className="card-featured p-12 max-w-4xl mx-auto">
-            <h3 className="heading-md mb-6">Professional Commitment</h3>
+          <div className="card-featured p-10 max-w-4xl mx-auto">
+            <h3 className="text-2xl font-bold text-gray-900 mb-6">Mission</h3>
             
-            <p className="text-lead mb-8">
-              I am committed to applying engineering principles with integrity, contributing to 
-              sustainable development, and continuously learning to become a valuable asset to 
-              any organization while serving the broader community through quality infrastructure.
+            <p className="text-lg text-gray-700 mb-8 leading-relaxed">
+              To contribute to infrastructure development through innovative engineering 
+              solutions, sustainable practices, and continuous professional growth while 
+              maintaining the highest standards of quality and integrity.
             </p>
             
-            <div className="flex flex-wrap justify-center gap-4">
-              <span className="badge">Infrastructure Development</span>
-              <span className="badge">Sustainable Construction</span>
-              <span className="badge">Project Management</span>
-              <span className="badge">Team Collaboration</span>
+            <div className="flex flex-wrap justify-center gap-3">
+              <span className="badge">Sustainable Design</span>
+              <span className="badge">Quality Engineering</span>
+              <span className="badge">Innovation</span>
+              <span className="badge">Professional Growth</span>
             </div>
           </div>
         </motion.div>

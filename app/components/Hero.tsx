@@ -3,6 +3,100 @@
 import { motion } from 'framer-motion';
 import Image from 'next/image';
 import { ArrowDown, Download, MapPin, Phone, Mail, Award, Instagram, Facebook, Linkedin } from 'lucide-react';
+import { useState, useEffect } from 'react';
+
+const ProfileImageSlider = () => {
+  const [currentImage, setCurrentImage] = useState(0);
+  const images = ['/images/001.jpg', '/images/002.jpg', '/images/003.jpg'];
+
+  useEffect(() => {
+    const interval = setInterval(() => {
+      setCurrentImage((prev) => (prev + 1) % images.length);
+    }, 4000);
+    return () => clearInterval(interval);
+  }, [images.length]);
+
+  return (
+    <div className="relative">
+      {/* Main Profile Container */}
+      <div className="relative w-80 h-80 sm:w-96 sm:h-96 lg:w-[450px] lg:h-[450px]">
+        {/* Background Circle */}
+        <div className="absolute inset-0 bg-gradient-to-br from-blue-100 to-blue-200 rounded-full opacity-20"></div>
+        
+        {/* Profile Image Container */}
+        <div className="relative w-full h-full bg-white rounded-3xl shadow-xl border border-gray-100 overflow-hidden profile-image-container">
+          <div className="absolute inset-0 bg-gradient-to-br from-blue-50/30 to-transparent z-10"></div>
+          
+          {/* Sliding Images */}
+          <div className="relative w-full h-full">
+            {images.map((image, index) => (
+              <motion.div
+                key={index}
+                initial={{ opacity: 0, scale: 1.1, rotate: 2 }}
+                animate={{ 
+                  opacity: currentImage === index ? 1 : 0,
+                  scale: currentImage === index ? 1 : 1.1,
+                  rotate: currentImage === index ? 0 : 2
+                }}
+                transition={{ duration: 1, ease: 'easeInOut' }}
+                className="absolute inset-0"
+              >
+                <Image
+                  src={image}
+                  alt={`Adarsh Mandal - Photo ${index + 1}`}
+                  fill
+                  className="object-contain transition-transform duration-700 hover:scale-105"
+                  priority={index === 0}
+                />
+              </motion.div>
+            ))}
+          </div>
+          
+          {/* Image Indicators */}
+          <div className="absolute bottom-4 left-1/2 transform -translate-x-1/2 flex gap-3 z-20">
+            {images.map((_, index) => (
+              <button
+                key={index}
+                onClick={() => setCurrentImage(index)}
+                className={`image-indicator w-3 h-3 rounded-full transition-all duration-300 ${
+                  currentImage === index 
+                    ? 'bg-white shadow-lg ring-2 ring-blue-400 ring-opacity-50' 
+                    : 'bg-white/60 hover:bg-white/80'
+                }`}
+              />
+            ))}
+          </div>
+          
+          {/* Progress Bar */}
+          <div className="absolute bottom-0 left-0 right-0 h-1 bg-black/10 z-20">
+            <motion.div
+              className="h-full bg-gradient-to-r from-blue-500 to-blue-600"
+              initial={{ width: '0%' }}
+              animate={{ width: '100%' }}
+              transition={{ duration: 4, ease: 'linear', repeat: Infinity }}
+              key={currentImage}
+            />
+          </div>
+        </div>
+      </div>
+
+
+
+      {/* NEC Badge */}
+      <motion.div
+        initial={{ opacity: 0, scale: 0.8 }}
+        animate={{ opacity: 1, scale: 1 }}
+        transition={{ duration: 0.8, delay: 1.2 }}
+        className="absolute -top-4 -right-4 bg-blue-600 text-white px-4 py-2 rounded-xl shadow-lg"
+      >
+        <div className="flex items-center gap-2">
+          <Award className="w-4 h-4" />
+          <span className="font-bold text-sm">NEC Certified</span>
+        </div>
+      </motion.div>
+    </div>
+  );
+};
 
 const Hero = () => {
   const handleResumeDownload = () => {
@@ -74,9 +168,9 @@ const Hero = () => {
                 Civil Engineer
               </h2>
               <p className="text-lead max-w-2xl mx-auto lg:mx-0">
-                Recent Civil Engineering graduate passionate about sustainable infrastructure 
+                Civil Engineering graduate passionate about sustainable infrastructure 
                 development and innovative construction solutions. Ready to contribute to 
-                Nepal's growth through engineering excellence.
+                growth through engineering excellence.
               </p>
             </motion.div>
 
@@ -89,7 +183,7 @@ const Hero = () => {
             >
               <div className="flex items-center justify-center lg:justify-start gap-3 p-4 bg-white rounded-lg shadow-sm">
                 <MapPin className="w-5 h-5 text-blue-600 flex-shrink-0" />
-                <span className="text-sm font-medium text-gray-700">Birgunj, Nepal</span>
+                <span className="text-sm font-medium text-gray-700">Kathmandu, Nepal</span>
               </div>
               <div className="flex items-center justify-center lg:justify-start gap-3 p-4 bg-white rounded-lg shadow-sm">
                 <Phone className="w-5 h-5 text-blue-600 flex-shrink-0" />
@@ -173,64 +267,14 @@ const Hero = () => {
             </motion.div>
           </motion.div>
 
-          {/* Right Content - Profile */}
+          {/* Right Content - Profile Gallery */}
           <motion.div
             initial={{ opacity: 0, x: 50 }}
             animate={{ opacity: 1, x: 0 }}
             transition={{ duration: 0.8, delay: 0.4 }}
             className="flex justify-center lg:justify-end"
           >
-            <div className="relative">
-              {/* Main Profile Container */}
-              <div className="relative w-80 h-80 sm:w-96 sm:h-96 lg:w-[450px] lg:h-[450px]">
-                {/* Background Circle */}
-                <div className="absolute inset-0 bg-gradient-to-br from-blue-100 to-blue-200 rounded-full opacity-20"></div>
-                
-                {/* Profile Card */}
-                <div className="relative w-full h-full bg-white rounded-3xl shadow-xl border border-gray-100 overflow-hidden">
-                  <div className="absolute inset-0 bg-gradient-to-br from-blue-50/50 to-transparent"></div>
-                  <div className="flex items-center justify-center h-full p-8">
-                    <div className="text-center">
-                      <div className="w-24 h-24 sm:w-32 sm:h-32 bg-blue-100 rounded-2xl flex items-center justify-center mx-auto mb-6">
-                        <Award className="w-12 h-12 sm:w-16 sm:h-16 text-blue-600" />
-                      </div>
-                      <h3 className="text-xl font-bold text-gray-800 mb-2">Professional Photo</h3>
-                      <p className="text-gray-600 text-sm">Add your image to<br />public/images/profile.jpg</p>
-                    </div>
-                  </div>
-                </div>
-              </div>
-
-              {/* Floating Stats */}
-              <motion.div
-                initial={{ opacity: 0, scale: 0.8 }}
-                animate={{ opacity: 1, scale: 1 }}
-                transition={{ duration: 0.8, delay: 1 }}
-                className="absolute -bottom-6 -left-6 grid grid-cols-2 gap-3"
-              >
-                <div className="bg-white rounded-xl p-4 shadow-lg text-center">
-                  <div className="text-2xl font-bold text-blue-600 mb-1">2024</div>
-                  <div className="text-xs text-gray-600 font-medium">Graduate</div>
-                </div>
-                <div className="bg-white rounded-xl p-4 shadow-lg text-center">
-                  <div className="text-2xl font-bold text-blue-600 mb-1">B.E.</div>
-                  <div className="text-xs text-gray-600 font-medium">Civil Eng.</div>
-                </div>
-              </motion.div>
-
-              {/* NEC Badge */}
-              <motion.div
-                initial={{ opacity: 0, scale: 0.8 }}
-                animate={{ opacity: 1, scale: 1 }}
-                transition={{ duration: 0.8, delay: 1.2 }}
-                className="absolute -top-4 -right-4 bg-blue-600 text-white px-4 py-2 rounded-xl shadow-lg"
-              >
-                <div className="flex items-center gap-2">
-                  <Award className="w-4 h-4" />
-                  <span className="font-bold text-sm">NEC Certified</span>
-                </div>
-              </motion.div>
-            </div>
+            <ProfileImageSlider />
           </motion.div>
         </div>
       </div>

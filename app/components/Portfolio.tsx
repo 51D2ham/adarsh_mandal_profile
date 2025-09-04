@@ -130,7 +130,7 @@ const Portfolio = () => {
         </motion.div>
 
         {/* Projects Grid */}
-        <div className="grid-responsive mb-16">
+        <div className="grid grid-cols-1 lg:grid-cols-2 gap-8 mb-16">
           {filteredProjects.map((project, index) => (
             <motion.div
               key={project.id}
@@ -138,68 +138,81 @@ const Portfolio = () => {
               whileInView={{ opacity: 1, y: 0 }}
               transition={{ duration: 0.6, delay: index * 0.1 }}
               viewport={{ once: true }}
-              className="card-featured p-6 group"
+              className="card group hover:shadow-xl transition-all duration-300 overflow-hidden"
             >
               {/* Project Header */}
-              <div className="flex items-start justify-between mb-4">
-                <div className="w-12 h-12 accent-gradient rounded-xl flex items-center justify-center">
-                  <Building2 className="w-6 h-6 text-white" />
+              <div className="bg-gradient-to-r from-blue-50 to-blue-100 p-6 border-b">
+                <div className="flex items-center justify-between mb-3">
+                  <div className="w-10 h-10 accent-gradient rounded-lg flex items-center justify-center">
+                    <Building2 className="w-5 h-5 text-white" />
+                  </div>
+                  <div className="flex items-center gap-2">
+                    <span className={`px-3 py-1 rounded-full text-xs font-semibold ${getStatusColor(project.status)}`}>
+                      {project.status}
+                    </span>
+                    <span className="bg-white px-3 py-1 rounded-full text-xs font-semibold text-gray-600">
+                      {project.year}
+                    </span>
+                  </div>
                 </div>
-                <div className="flex items-center gap-2">
-                  <span className={`inline-flex items-center px-2 py-1 rounded-full text-xs font-medium ${getStatusColor(project.status)}`}>
-                    {project.status}
-                  </span>
-                  <span className="text-sm font-medium text-gray-500">{project.year}</span>
-                </div>
+                
+                <h3 className="text-xl font-bold text-gray-900 mb-2 group-hover:text-blue-600 transition-colors duration-300">
+                  {project.title}
+                </h3>
+                
+                <p className="text-gray-600 text-sm leading-relaxed">
+                  {project.description}
+                </p>
               </div>
 
-              {/* Project Info */}
-              <div className="space-y-4">
-                <div>
-                  <h3 className="text-xl font-bold text-gray-900 mb-2 group-hover:text-blue-600 transition-colors duration-300">
-                    {project.title}
-                  </h3>
-                  <p className="text-gray-600 leading-relaxed">
-                    {project.description}
-                  </p>
-                </div>
-
-                {/* Project Details */}
-                <div className="grid grid-cols-2 gap-3 text-sm">
-                  <div className="flex items-center gap-2 text-gray-500">
-                    <Calendar className="w-4 h-4" />
-                    <span>{project.duration}</span>
+              {/* Project Body */}
+              <div className="p-6 space-y-6">
+                {/* Project Stats */}
+                <div className="grid grid-cols-2 gap-4">
+                  <div className="flex items-center gap-3 p-3 bg-gray-50 rounded-lg">
+                    <Calendar className="w-4 h-4 text-blue-600" />
+                    <div>
+                      <div className="text-xs text-gray-500 font-medium">Duration</div>
+                      <div className="text-sm font-semibold text-gray-900">{project.duration}</div>
+                    </div>
                   </div>
-                  <div className="flex items-center gap-2 text-gray-500">
-                    <Users className="w-4 h-4" />
-                    <span>{project.team}</span>
+                  
+                  <div className="flex items-center gap-3 p-3 bg-gray-50 rounded-lg">
+                    <Users className="w-4 h-4 text-blue-600" />
+                    <div>
+                      <div className="text-xs text-gray-500 font-medium">Team</div>
+                      <div className="text-sm font-semibold text-gray-900">{project.team}</div>
+                    </div>
                   </div>
-                  <div className="flex items-center gap-2 text-gray-500">
-                    <MapPin className="w-4 h-4" />
-                    <span>{project.location}</span>
-                  </div>
-                  <div className="flex items-center gap-2 text-gray-500">
-                    <Award className="w-4 h-4" />
-                    <span>{project.budget}</span>
+                  
+                  <div className="flex items-center gap-3 p-3 bg-gray-50 rounded-lg col-span-2">
+                    <MapPin className="w-4 h-4 text-blue-600" />
+                    <div>
+                      <div className="text-xs text-gray-500 font-medium">Location</div>
+                      <div className="text-sm font-semibold text-gray-900">{project.location}</div>
+                    </div>
                   </div>
                 </div>
 
                 {/* Technologies */}
-                <div className="flex flex-wrap gap-2">
-                  {project.technologies.map((tech) => (
-                    <span
-                      key={tech}
-                      className="bg-blue-50 text-blue-700 px-3 py-1 rounded-full text-xs font-medium"
-                    >
-                      {tech}
-                    </span>
-                  ))}
+                <div>
+                  <div className="text-sm font-semibold text-gray-900 mb-3">Technologies Used</div>
+                  <div className="flex flex-wrap gap-2">
+                    {project.technologies.map((tech) => (
+                      <span
+                        key={tech}
+                        className="bg-blue-100 text-blue-700 px-3 py-1 rounded-lg text-xs font-medium"
+                      >
+                        {tech}
+                      </span>
+                    ))}
+                  </div>
                 </div>
 
-                {/* View Details Button */}
-                <button className="w-full btn-secondary group/btn">
-                  <ExternalLink className="w-4 h-4 mr-2 group-hover/btn:translate-x-1 transition-transform duration-300" />
-                  View Details
+                {/* Action Button */}
+                <button className="w-full bg-gray-900 text-white py-3 rounded-lg font-semibold hover:bg-blue-600 transition-colors duration-300 flex items-center justify-center gap-2 group/btn">
+                  <ExternalLink className="w-4 h-4 group-hover/btn:translate-x-1 transition-transform duration-300" />
+                  View Project Details
                 </button>
               </div>
             </motion.div>
@@ -214,25 +227,25 @@ const Portfolio = () => {
           viewport={{ once: true }}
           className="text-center"
         >
-          <div className="card-featured p-12">
-            <h3 className="heading-md mb-6">Academic Achievements</h3>
+          <div className="bg-gradient-to-r from-blue-600 to-blue-700 text-white rounded-2xl p-10">
+            <h3 className="text-2xl font-bold mb-8">Portfolio Summary</h3>
             
-            <div className="grid grid-cols-1 md:grid-cols-4 gap-8">
+            <div className="grid grid-cols-2 md:grid-cols-4 gap-6">
               <div className="text-center">
-                <div className="text-3xl font-bold text-blue-600 mb-2">4+</div>
-                <div className="text-gray-600 font-medium">Projects Completed</div>
+                <div className="text-3xl font-bold mb-2">4</div>
+                <div className="text-blue-100 font-medium text-sm">Projects Completed</div>
               </div>
               <div className="text-center">
-                <div className="text-3xl font-bold text-blue-600 mb-2">B.E.</div>
-                <div className="text-gray-600 font-medium">Civil Engineering</div>
+                <div className="text-3xl font-bold mb-2">15+</div>
+                <div className="text-blue-100 font-medium text-sm">Months Experience</div>
               </div>
               <div className="text-center">
-                <div className="text-3xl font-bold text-blue-600 mb-2">2024</div>
-                <div className="text-gray-600 font-medium">Graduate</div>
+                <div className="text-3xl font-bold mb-2">8+</div>
+                <div className="text-blue-100 font-medium text-sm">Technologies Used</div>
               </div>
               <div className="text-center">
-                <div className="text-3xl font-bold text-blue-600 mb-2">NEC</div>
-                <div className="text-gray-600 font-medium">Registered</div>
+                <div className="text-3xl font-bold mb-2">100%</div>
+                <div className="text-blue-100 font-medium text-sm">Success Rate</div>
               </div>
             </div>
           </div>

@@ -2,13 +2,13 @@
 
 import { useState } from 'react';
 import { motion } from 'framer-motion';
-import { Mail, Phone, MapPin, Send, User, MessageSquare, Building2 } from 'lucide-react';
+import { Mail, Phone, MapPin, Send, User, MessageSquare } from 'lucide-react';
 
 const Contact = () => {
   const [formData, setFormData] = useState({
     name: '',
     email: '',
-    subject: '',
+    phone: '',
     message: ''
   });
   const [isSubmitting, setIsSubmitting] = useState(false);
@@ -24,49 +24,39 @@ const Contact = () => {
     e.preventDefault();
     setIsSubmitting(true);
     
-    // Simulate form submission
     setTimeout(() => {
       alert('Thank you for your message! I will get back to you soon.');
-      setFormData({ name: '', email: '', subject: '', message: '' });
+      setFormData({ name: '', email: '', phone: '', message: '' });
       setIsSubmitting(false);
     }, 1000);
   };
 
-  const contactInfo = [
+  const contactMethods = [
     {
       icon: Phone,
-      title: 'Phone',
+      label: 'Call',
       value: '+977 9811272899',
       href: 'tel:+9779811272899',
-      description: 'Available Mon-Fri, 9AM-6PM'
+      color: 'bg-green-500'
     },
     {
       icon: Mail,
-      title: 'Email',
+      label: 'Email',
       value: 'adarsh.mandal.143@gmail.com',
       href: 'mailto:adarsh.mandal.143@gmail.com',
-      description: 'Response within 24 hours'
+      color: 'bg-blue-500'
     },
     {
       icon: MapPin,
-      title: 'Location',
+      label: 'Location',
       value: 'Birgunj, Nepal',
       href: '#',
-      description: 'Available for relocation'
+      color: 'bg-purple-500'
     }
   ];
 
-  const services = [
-    'Structural Design & Analysis',
-    'Construction Planning',
-    'Project Management Support',
-    'CAD Drafting Services',
-    'Site Supervision',
-    'Quality Control & Testing'
-  ];
-
   return (
-    <section id="contact" className="section bg-gradient-to-br from-blue-50 to-gray-50">
+    <section id="contact" className="section bg-gray-50">
       <div className="container">
         {/* Section Header */}
         <motion.div
@@ -74,7 +64,7 @@ const Contact = () => {
           whileInView={{ opacity: 1, y: 0 }}
           transition={{ duration: 0.8 }}
           viewport={{ once: true }}
-          className="text-center mb-16"
+          className="text-center mb-12"
         >
           <div className="badge mb-4">
             <Mail className="w-4 h-4 mr-2" />
@@ -82,81 +72,52 @@ const Contact = () => {
           </div>
           
           <h2 className="heading-lg mb-6">
-            Get In <span className="text-gradient">Touch</span>
+            Let's <span className="text-gradient">Connect</span>
           </h2>
           
-          <p className="text-lead max-w-3xl mx-auto">
-            Ready to discuss opportunities or collaborate on projects? 
-            I'm always open to new challenges and learning experiences.
+          <p className="text-lead max-w-2xl mx-auto">
+            Ready to discuss opportunities? Let's start a conversation.
           </p>
         </motion.div>
 
-        <div className="grid-responsive-2">
-          {/* Contact Information */}
+        {/* Contact Methods */}
+        <motion.div
+          initial={{ opacity: 0, y: 30 }}
+          whileInView={{ opacity: 1, y: 0 }}
+          transition={{ duration: 0.8 }}
+          viewport={{ once: true }}
+          className="grid grid-cols-1 md:grid-cols-3 gap-6 mb-12"
+        >
+          {contactMethods.map((method, index) => (
+            <motion.a
+              key={method.label}
+              href={method.href}
+              initial={{ opacity: 0, y: 20 }}
+              whileInView={{ opacity: 1, y: 0 }}
+              transition={{ duration: 0.6, delay: index * 0.1 }}
+              viewport={{ once: true }}
+              className="card p-6 group hover:shadow-lg transition-all duration-300"
+            >
+              <div className="flex items-center gap-4">
+                <div className="w-10 h-10 accent-gradient rounded-lg flex items-center justify-center group-hover:scale-110 transition-transform duration-300">
+                  <method.icon className="w-5 h-5 text-white" />
+                </div>
+                <div className="flex-1">
+                  <h3 className="text-lg font-bold text-gray-900 mb-1">{method.label}</h3>
+                  <p className="text-gray-600 text-sm break-all">{method.value}</p>
+                </div>
+              </div>
+            </motion.a>
+          ))}
+        </motion.div>
+
+        {/* Main Content */}
+        <div className="grid grid-cols-1 lg:grid-cols-2 gap-12">
+          {/* Contact Form */}
           <motion.div
             initial={{ opacity: 0, x: -30 }}
             whileInView={{ opacity: 1, x: 0 }}
             transition={{ duration: 0.8 }}
-            viewport={{ once: true }}
-            className="space-content"
-          >
-            {/* Contact Cards */}
-            <div className="space-y-6">
-              {contactInfo.map((info, index) => (
-                <motion.a
-                  key={info.title}
-                  href={info.href}
-                  initial={{ opacity: 0, y: 20 }}
-                  whileInView={{ opacity: 1, y: 0 }}
-                  transition={{ duration: 0.6, delay: index * 0.1 }}
-                  viewport={{ once: true }}
-                  className="card p-6 hover:shadow-lg transition-all duration-300 block group"
-                >
-                  <div className="flex items-start gap-4">
-                    <div className="w-12 h-12 accent-gradient rounded-xl flex items-center justify-center group-hover:scale-110 transition-transform duration-300">
-                      <info.icon className="w-6 h-6 text-white" />
-                    </div>
-                    <div className="flex-1">
-                      <h3 className="text-lg font-bold text-gray-900 mb-1">
-                        {info.title}
-                      </h3>
-                      <p className="text-blue-600 font-semibold mb-1">{info.value}</p>
-                      <p className="text-gray-600 text-sm">{info.description}</p>
-                    </div>
-                  </div>
-                </motion.a>
-              ))}
-            </div>
-
-            {/* Services */}
-            <motion.div
-              initial={{ opacity: 0, y: 20 }}
-              whileInView={{ opacity: 1, y: 0 }}
-              transition={{ duration: 0.8, delay: 0.4 }}
-              viewport={{ once: true }}
-              className="card p-8"
-            >
-              <div className="flex items-center gap-3 mb-6">
-                <Building2 className="w-6 h-6 text-blue-600" />
-                <h3 className="text-xl font-bold text-gray-900">Services Offered</h3>
-              </div>
-              
-              <ul className="space-y-3">
-                {services.map((service, index) => (
-                  <li key={index} className="flex items-center gap-3">
-                    <div className="w-2 h-2 bg-blue-600 rounded-full"></div>
-                    <span className="text-gray-700">{service}</span>
-                  </li>
-                ))}
-              </ul>
-            </motion.div>
-          </motion.div>
-
-          {/* Contact Form */}
-          <motion.div
-            initial={{ opacity: 0, x: 30 }}
-            whileInView={{ opacity: 1, x: 0 }}
-            transition={{ duration: 0.8, delay: 0.2 }}
             viewport={{ once: true }}
           >
             <div className="card p-8">
@@ -204,19 +165,22 @@ const Contact = () => {
                 </div>
 
                 <div>
-                  <label htmlFor="subject" className="block text-sm font-semibold text-gray-700 mb-2">
-                    Subject *
+                  <label htmlFor="phone" className="block text-sm font-semibold text-gray-700 mb-2">
+                    Phone Number (with country code) *
                   </label>
-                  <input
-                    type="text"
-                    id="subject"
-                    name="subject"
-                    value={formData.subject}
-                    onChange={handleChange}
-                    required
-                    className="form-input"
-                    placeholder="What's this about?"
-                  />
+                  <div className="relative">
+                    <Phone className="absolute left-3 top-1/2 transform -translate-y-1/2 w-5 h-5 text-gray-400" />
+                    <input
+                      type="tel"
+                      id="phone"
+                      name="phone"
+                      value={formData.phone}
+                      onChange={handleChange}
+                      required
+                      className="form-input pl-12"
+                      placeholder="+977 9811234567"
+                    />
+                  </div>
                 </div>
 
                 <div>
@@ -258,34 +222,48 @@ const Contact = () => {
               </form>
             </div>
           </motion.div>
-        </div>
 
-        {/* Call to Action */}
-        <motion.div
-          initial={{ opacity: 0, y: 30 }}
-          whileInView={{ opacity: 1, y: 0 }}
-          transition={{ duration: 0.8 }}
-          viewport={{ once: true }}
-          className="text-center mt-16"
-        >
-          <div className="card-featured p-12">
-            <h3 className="heading-md mb-4">Ready to Work Together?</h3>
-            <p className="text-lead mb-8">
-              I'm excited about opportunities to contribute to meaningful projects 
-              and grow as a professional civil engineer.
-            </p>
-            <div className="flex flex-col sm:flex-row gap-4 justify-center">
-              <a href="tel:+9779811272899" className="btn-primary">
-                <Phone className="w-5 h-5 mr-2" />
-                Call Now
-              </a>
-              <a href="mailto:adarsh.mandal.143@gmail.com" className="btn-secondary">
-                <Mail className="w-5 h-5 mr-2" />
-                Send Email
-              </a>
+          {/* Professional Info */}
+          <motion.div
+            initial={{ opacity: 0, x: 30 }}
+            whileInView={{ opacity: 1, x: 0 }}
+            transition={{ duration: 0.8, delay: 0.2 }}
+            viewport={{ once: true }}
+          >
+            <div className="card p-8">
+              <h3 className="text-2xl font-bold text-gray-900 mb-6">Professional Services</h3>
+              
+              <div className="space-y-4 mb-8">
+                <p className="text-gray-700 leading-relaxed">
+                  As a Civil Engineer, I offer modern engineering solutions 
+                with up-to-date knowledge of industry standards and practices.
+                </p>
+              </div>
+
+              <div className="space-y-4">
+                <h4 className="text-lg font-semibold text-gray-900">Areas of Expertise</h4>
+                <ul className="space-y-3">
+                  <li className="flex items-center gap-3">
+                    <div className="w-2 h-2 bg-blue-600 rounded-full"></div>
+                    <span className="text-gray-700">Structural Design & Analysis</span>
+                  </li>
+                  <li className="flex items-center gap-3">
+                    <div className="w-2 h-2 bg-blue-600 rounded-full"></div>
+                    <span className="text-gray-700">CAD Drafting & Design</span>
+                  </li>
+                  <li className="flex items-center gap-3">
+                    <div className="w-2 h-2 bg-blue-600 rounded-full"></div>
+                    <span className="text-gray-700">Project Planning & Management</span>
+                  </li>
+                  <li className="flex items-center gap-3">
+                    <div className="w-2 h-2 bg-blue-600 rounded-full"></div>
+                    <span className="text-gray-700">Site Supervision & Quality Control</span>
+                  </li>
+                </ul>
+              </div>
             </div>
-          </div>
-        </motion.div>
+          </motion.div>
+        </div>
       </div>
     </section>
   );

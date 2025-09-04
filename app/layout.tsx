@@ -9,7 +9,8 @@ export const metadata: Metadata = {
   title: 'Adarsh Mandal - Civil Engineer | Infrastructure Design & Development',
   description: 'Professional Civil Engineer specializing in road design, surveying, and infrastructure development. NEC registered engineer with expertise in AutoCAD, ARC GIS, and project management.',
   icons: {
-    icon: '/favicon.ico',
+    icon: '/images/001.jpg',
+    apple: '/images/001.jpg',
   },
   keywords: 'civil engineer, road design, surveying, infrastructure, AutoCAD, ARC GIS, Nepal, construction',
   authors: [{ name: 'Adarsh Mandal' }],
@@ -85,7 +86,8 @@ export default function RootLayout({
           `
         }} />{/* */}
         
-        <link rel="icon" href="/favicon.ico" />{/* */}
+        <link rel="icon" href="/images/001.jpg" />
+        <link rel="apple-touch-icon" href="/images/001.jpg" />{/* */}
         <link rel="canonical" href="https://adarshmandal.com" />{/* */}
         <meta name="viewport" content="width=device-width, initial-scale=1" />{/* */}
         
