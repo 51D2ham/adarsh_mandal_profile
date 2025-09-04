@@ -2,36 +2,112 @@
 
 import { useState } from 'react';
 import { motion } from 'framer-motion';
-import { Mail, Phone, MapPin, Send, User, MessageSquare } from 'lucide-react';
+import { Mail, Phone, MapPin, Send, User, MessageSquare, CheckCircle, AlertCircle } from 'lucide-react';
+
+interface ContactFormData {
+  name: string;
+  email: string;
+  phone: string;
+  message: string;
+}
+
+interface SubmitStatus {
+  type: 'success' | 'error' | null;
+  message: string;
+}
+
+interface ContactMethod {
+  icon: React.ComponentType<{ className?: string }>;
+  label: string;
+  value: string;
+  href: string;
+  color: string;
+}
+
+interface ApiResponse {
+  success?: boolean;
+  message?: string;
+  error?: string;
+}
 
 const Contact = () => {
-  const [formData, setFormData] = useState({
+  const [formData, setFormData] = useState<ContactFormData>({
     name: '',
     email: '',
     phone: '',
     message: ''
   });
-  const [isSubmitting, setIsSubmitting] = useState(false);
+  const [isSubmitting, setIsSubmitting] = useState<boolean>(false);
+  const [submitStatus, setSubmitStatus] = useState<SubmitStatus>({ 
+    type: null, 
+    message: '' 
+  });
 
-  const handleChange = (e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement>) => {
-    setFormData({
-      ...formData,
-      [e.target.name]: e.target.value
-    });
+  const handleChange = (e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement>): void => {
+    const { name, value } = e.target;
+    setFormData(prevData => ({
+      ...prevData,
+      [name]: value
+    }));
+    
+    if (submitStatus.type) {
+      setSubmitStatus({ type: null, message: '' });
+    }
   };
 
-  const handleSubmit = async (e: React.FormEvent) => {
+  const handleSubmit = async (e: React.FormEvent<HTMLFormElement>): Promise<void> => {
     e.preventDefault();
     setIsSubmitting(true);
+    setSubmitStatus({ type: null, message: '' });
     
-    setTimeout(() => {
-      alert('Thank you for your message! I will get back to you soon.');
-      setFormData({ name: '', email: '', phone: '', message: '' });
+    try {
+      const response = await fetch('/api/contact', {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json',
+        },
+        body: JSON.stringify(formData),
+      });
+
+      if (!response.ok) {
+        throw new Error(`HTTP error! status: ${response.status}`);
+      }
+
+      const data: ApiResponse = await response.json();
+
+      if (data.success) {
+        setSubmitStatus({
+          type: 'success',
+          message: data.message || 'Message sent successfully! You will receive a confirmation email shortly.'
+        });
+        setFormData({ name: '', email: '', phone: '', message: '' });
+      } else {
+        setSubmitStatus({
+          type: 'error',
+          message: data.error || 'Failed to send message. Please try again.'
+        });
+      }
+    } catch (error: unknown) {
+      console.error('Contact form error:', error);
+      
+      let errorMessage = 'Network error. Please check your connection and try again.';
+      
+      if (error instanceof Error) {
+        if (error.message.includes('HTTP error')) {
+          errorMessage = 'Server error. Please try again later.';
+        }
+      }
+      
+      setSubmitStatus({
+        type: 'error',
+        message: errorMessage
+      });
+    } finally {
       setIsSubmitting(false);
-    }, 1000);
+    }
   };
 
-  const contactMethods = [
+  const contactMethods: ContactMethod[] = [
     {
       icon: Phone,
       label: 'Call',
@@ -50,7 +126,7 @@ const Contact = () => {
       icon: MapPin,
       label: 'Location',
       value: 'Birgunj, Nepal',
-      href: '#',
+      href: 'https://maps.google.com/?q=Birgunj,Nepal',
       color: 'bg-purple-500'
     }
   ];
@@ -58,7 +134,6 @@ const Contact = () => {
   return (
     <section id="contact" className="section bg-gray-50">
       <div className="container">
-        {/* Section Header */}
         <motion.div
           initial={{ opacity: 0, y: 30 }}
           whileInView={{ opacity: 1, y: 0 }}
@@ -80,7 +155,6 @@ const Contact = () => {
           </p>
         </motion.div>
 
-        {/* Contact Methods */}
         <motion.div
           initial={{ opacity: 0, y: 30 }}
           whileInView={{ opacity: 1, y: 0 }}
@@ -111,9 +185,7 @@ const Contact = () => {
           ))}
         </motion.div>
 
-        {/* Main Content */}
         <div className="grid grid-cols-1 lg:grid-cols-2 gap-12">
-          {/* Contact Form */}
           <motion.div
             initial={{ opacity: 0, x: -30 }}
             whileInView={{ opacity: 1, x: 0 }}
@@ -124,6 +196,25 @@ const Contact = () => {
               <h3 className="text-2xl font-bold text-gray-900 mb-6">Send a Message</h3>
               
               <form onSubmit={handleSubmit} className="space-y-6">
+                {submitStatus.type && (
+                  <motion.div
+                    initial={{ opacity: 0, y: -10 }}
+                    animate={{ opacity: 1, y: 0 }}
+                    className={`p-4 rounded-lg flex items-center gap-3 ${
+                      submitStatus.type === 'success'
+                        ? 'bg-green-50 text-green-800 border border-green-200'
+                        : 'bg-red-50 text-red-800 border border-red-200'
+                    }`}
+                  >
+                    {submitStatus.type === 'success' ? (
+                      <CheckCircle className="w-5 h-5 text-green-600" />
+                    ) : (
+                      <AlertCircle className="w-5 h-5 text-red-600" />
+                    )}
+                    <span className="text-sm font-medium">{submitStatus.message}</span>
+                  </motion.div>
+                )}
+
                 <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
                   <div>
                     <label htmlFor="name" className="block text-sm font-semibold text-gray-700 mb-2">
@@ -138,7 +229,8 @@ const Contact = () => {
                         value={formData.name}
                         onChange={handleChange}
                         required
-                        className="form-input pl-12"
+                        disabled={isSubmitting}
+                        className="form-input pl-12 disabled:bg-gray-50 disabled:cursor-not-allowed"
                         placeholder="Your full name"
                       />
                     </div>
@@ -157,7 +249,8 @@ const Contact = () => {
                         value={formData.email}
                         onChange={handleChange}
                         required
-                        className="form-input pl-12"
+                        disabled={isSubmitting}
+                        className="form-input pl-12 disabled:bg-gray-50 disabled:cursor-not-allowed"
                         placeholder="your.email@example.com"
                       />
                     </div>
@@ -177,7 +270,8 @@ const Contact = () => {
                       value={formData.phone}
                       onChange={handleChange}
                       required
-                      className="form-input pl-12"
+                      disabled={isSubmitting}
+                      className="form-input pl-12 disabled:bg-gray-50 disabled:cursor-not-allowed"
                       placeholder="+977 9811234567"
                     />
                   </div>
@@ -195,8 +289,9 @@ const Contact = () => {
                       value={formData.message}
                       onChange={handleChange}
                       required
+                      disabled={isSubmitting}
                       rows={6}
-                      className="form-textarea pl-12"
+                      className="form-textarea pl-12 disabled:bg-gray-50 disabled:cursor-not-allowed"
                       placeholder="Tell me about your project or opportunity..."
                     />
                   </div>
@@ -210,7 +305,7 @@ const Contact = () => {
                   {isSubmitting ? (
                     <div className="flex items-center justify-center gap-2">
                       <div className="w-5 h-5 border-2 border-white/30 border-t-white rounded-full animate-spin"></div>
-                      Sending...
+                      Sending Message...
                     </div>
                   ) : (
                     <>
@@ -223,7 +318,6 @@ const Contact = () => {
             </div>
           </motion.div>
 
-          {/* Professional Info */}
           <motion.div
             initial={{ opacity: 0, x: 30 }}
             whileInView={{ opacity: 1, x: 0 }}

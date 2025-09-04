@@ -7,7 +7,7 @@ const About = () => {
   const stats = [
     { label: 'Education', value: 'B.E. Civil Engineering', icon: GraduationCap },
     { label: 'Registration', value: 'NEC #85377', icon: Award },
-    { label: 'Location', value: 'Kathmandu, Nepal', icon: MapPin },
+    { label: 'Location', value: 'Birgunj, Nepal', icon: MapPin },
     { label: 'Year', value: '2024 Graduate', icon: Calendar }
   ];
 

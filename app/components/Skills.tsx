@@ -18,28 +18,42 @@ import {
 
 const Skills = () => {
   const technicalSkills = [
-    { name: 'Structural Analysis', level: 85, icon: Building2 },
-    { name: 'AutoCAD Design', level: 90, icon: Compass },
-    { name: 'Project Planning', level: 80, icon: Target },
-    { name: 'Cost Estimation', level: 75, icon: Calculator },
-    { name: 'Quality Control', level: 85, icon: Shield },
-    { name: 'Site Management', level: 70, icon: Settings }
+    { name: 'Structural Analysis', icon: Building2 },
+    { name: 'AutoCAD Design', icon: Compass },
+    { name: 'Project Planning', icon: Target },
+    { name: 'Cost Estimation', icon: Calculator },
+    { name: 'Quality Control', icon: Shield },
+    { name: 'Site Management', icon: Settings }
   ];
 
   const softSkills = [
-    { name: 'Team Collaboration', level: 90, icon: Users },
-    { name: 'Communication', level: 85, icon: FileText },
-    { name: 'Problem Solving', level: 88, icon: Target },
-    { name: 'Leadership', level: 75, icon: BarChart3 }
+    { name: 'Team Collaboration', icon: Users },
+    { name: 'Communication', icon: FileText },
+    { name: 'Problem Solving', icon: Target },
+    { name: 'Leadership', icon: BarChart3 }
   ];
 
   const software = [
     { name: 'AutoCAD', proficiency: 'Advanced', icon: Compass },
-    { name: 'STAAD Pro', proficiency: 'Intermediate', icon: Layers },
-    { name: 'MS Project', proficiency: 'Intermediate', icon: FileText },
-    { name: 'ETABS', proficiency: 'Basic', icon: Building2 },
-    { name: 'MS Office', proficiency: 'Advanced', icon: Settings },
-    { name: 'SketchUp', proficiency: 'Intermediate', icon: Wrench }
+    { name: 'ARC GIS', proficiency: 'Intermediate', icon: Layers },
+    { name: 'Surveying', proficiency: 'Advanced', icon: Target },
+    { name: 'Soil Testing', proficiency: 'Intermediate', icon: Building2 },
+    { name: 'Smart Road', proficiency: 'Intermediate', icon: Settings },
+    { name: 'MS Office Suite', proficiency: 'Advanced', icon: FileText }
+  ];
+
+  const languages = [
+    { name: 'Nepali', proficiency: 'Native' },
+    { name: 'English', proficiency: 'Fluent' },
+    { name: 'Hindi', proficiency: 'Fluent' },
+    { name: 'Maithili', proficiency: 'Proficient' }
+  ];
+
+  const otherSkills = [
+    'Leadership',
+    'Team Building',
+    'Critical Thinking',
+    'Adaptability'
   ];
 
   const certifications = [
@@ -101,64 +115,44 @@ const Skills = () => {
           </p>
         </motion.div>
 
-        {/* Technical Skills */}
-        <motion.div
-          initial={{ opacity: 0, y: 30 }}
-          whileInView={{ opacity: 1, y: 0 }}
-          transition={{ duration: 0.8 }}
-          viewport={{ once: true }}
-          className="mb-16"
-        >
-          <div className="card p-8">
-            <h3 className="heading-md mb-8 text-center">Technical Skills</h3>
-            
-            <div className="grid grid-cols-1 md:grid-cols-2 gap-8">
+        {/* Skills Grid */}
+        <div className="space-y-12">
+          {/* Technical Skills */}
+          <motion.div
+            initial={{ opacity: 0, y: 30 }}
+            whileInView={{ opacity: 1, y: 0 }}
+            transition={{ duration: 0.8 }}
+            viewport={{ once: true }}
+          >
+            <h3 className="text-2xl font-bold text-gray-900 mb-8 text-center">Technical Skills</h3>
+            <div className="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-6">
               {technicalSkills.map((skill, index) => (
                 <motion.div
                   key={skill.name}
-                  initial={{ opacity: 0, x: -30 }}
-                  whileInView={{ opacity: 1, x: 0 }}
+                  initial={{ opacity: 0, scale: 0.9 }}
+                  whileInView={{ opacity: 1, scale: 1 }}
                   transition={{ duration: 0.6, delay: index * 0.1 }}
                   viewport={{ once: true }}
-                  className="space-y-3"
+                  className="card p-6 text-center hover:shadow-lg transition-all duration-300"
                 >
-                  <div className="flex items-center justify-between">
-                    <div className="flex items-center gap-3">
-                      <div className="w-8 h-8 accent-gradient rounded-lg flex items-center justify-center">
-                        <skill.icon className="w-4 h-4 text-white" />
-                      </div>
-                      <span className="font-semibold text-gray-900">{skill.name}</span>
-                    </div>
-                    <span className="text-blue-600 font-bold text-sm">{skill.level}%</span>
+                  <div className="w-12 h-12 bg-blue-100 rounded-xl flex items-center justify-center mx-auto mb-4">
+                    <skill.icon className="w-6 h-6 text-blue-600" />
                   </div>
-                  
-                  <div className="skill-bar">
-                    <motion.div
-                      initial={{ width: 0 }}
-                      whileInView={{ width: `${skill.level}%` }}
-                      transition={{ duration: 1.5, delay: index * 0.1 }}
-                      viewport={{ once: true }}
-                      className="skill-progress"
-                    />
-                  </div>
+                  <span className="font-semibold text-gray-900 text-sm">{skill.name}</span>
                 </motion.div>
               ))}
             </div>
-          </div>
-        </motion.div>
+          </motion.div>
 
-        {/* Software & Tools */}
-        <motion.div
-          initial={{ opacity: 0, y: 30 }}
-          whileInView={{ opacity: 1, y: 0 }}
-          transition={{ duration: 0.8 }}
-          viewport={{ once: true }}
-          className="mb-16"
-        >
-          <div className="card p-8">
-            <h3 className="heading-md mb-8 text-center">Software & Tools</h3>
-            
-            <div className="grid-responsive">
+          {/* Software Skills */}
+          <motion.div
+            initial={{ opacity: 0, y: 30 }}
+            whileInView={{ opacity: 1, y: 0 }}
+            transition={{ duration: 0.8, delay: 0.2 }}
+            viewport={{ once: true }}
+          >
+            <h3 className="text-2xl font-bold text-gray-900 mb-8 text-center">Software & Tools</h3>
+            <div className="grid grid-cols-2 md:grid-cols-3 gap-6">
               {software.map((tool, index) => (
                 <motion.div
                   key={tool.name}
@@ -166,107 +160,92 @@ const Skills = () => {
                   whileInView={{ opacity: 1, scale: 1 }}
                   transition={{ duration: 0.6, delay: index * 0.1 }}
                   viewport={{ once: true }}
-                  className="bg-gray-50 rounded-xl p-6 hover:shadow-md transition-all duration-300"
+                  className="card p-6 hover:shadow-lg transition-all duration-300"
                 >
-                  <div className="flex items-center gap-4 mb-4">
-                    <div className="w-12 h-12 accent-gradient rounded-xl flex items-center justify-center">
-                      <tool.icon className="w-6 h-6 text-white" />
+                  <div className="flex items-center gap-4">
+                    <div className="w-12 h-12 bg-blue-100 rounded-xl flex items-center justify-center">
+                      <tool.icon className="w-6 h-6 text-blue-600" />
                     </div>
-                    <div className="flex-1">
-                      <h4 className="font-bold text-gray-900 text-lg">{tool.name}</h4>
-                    </div>
+                    <span className="font-semibold text-gray-900">{tool.name}</span>
                   </div>
-                  <span className={`inline-flex items-center px-3 py-1 rounded-full text-sm font-medium ${getProficiencyColor(tool.proficiency)}`}>
-                    {tool.proficiency}
-                  </span>
                 </motion.div>
               ))}
             </div>
-          </div>
-        </motion.div>
+          </motion.div>
 
-        {/* Soft Skills */}
-        <motion.div
-          initial={{ opacity: 0, y: 30 }}
-          whileInView={{ opacity: 1, y: 0 }}
-          transition={{ duration: 0.8 }}
-          viewport={{ once: true }}
-          className="mb-16"
-        >
-          <div className="card p-8">
-            <h3 className="heading-md mb-8 text-center">Professional Skills</h3>
-            
-            <div className="grid grid-cols-1 md:grid-cols-2 gap-8">
-              {softSkills.map((skill, index) => (
-                <motion.div
-                  key={skill.name}
-                  initial={{ opacity: 0, x: 30 }}
-                  whileInView={{ opacity: 1, x: 0 }}
-                  transition={{ duration: 0.6, delay: index * 0.1 }}
-                  viewport={{ once: true }}
-                  className="space-y-3"
-                >
-                  <div className="flex items-center justify-between">
-                    <div className="flex items-center gap-3">
-                      <div className="w-8 h-8 accent-gradient rounded-lg flex items-center justify-center">
-                        <skill.icon className="w-4 h-4 text-white" />
-                      </div>
-                      <span className="font-semibold text-gray-900">{skill.name}</span>
-                    </div>
-                    <span className="text-blue-600 font-bold text-sm">{skill.level}%</span>
-                  </div>
-                  
-                  <div className="skill-bar">
-                    <motion.div
-                      initial={{ width: 0 }}
-                      whileInView={{ width: `${skill.level}%` }}
-                      transition={{ duration: 1.5, delay: index * 0.1 }}
+          {/* Professional Skills & Languages */}
+          <div className="grid grid-cols-1 md:grid-cols-2 gap-8">
+            {/* Professional Skills */}
+            <motion.div
+              initial={{ opacity: 0, y: 30 }}
+              whileInView={{ opacity: 1, y: 0 }}
+              transition={{ duration: 0.8, delay: 0.4 }}
+              viewport={{ once: true }}
+              className="card p-8"
+            >
+              <h3 className="text-xl font-bold text-gray-900 mb-6 text-center">Professional Skills</h3>
+              <div className="grid grid-cols-2 gap-4">
+                {softSkills.map((skill, index) => (
+                  <motion.div
+                    key={skill.name}
+                    initial={{ opacity: 0, scale: 0.9 }}
+                    whileInView={{ opacity: 1, scale: 1 }}
+                    transition={{ duration: 0.6, delay: index * 0.1 }}
+                    viewport={{ once: true }}
+                    className="flex items-center gap-3 p-3 bg-gray-50 rounded-lg hover:bg-gray-100 transition-colors duration-300"
+                  >
+                    <skill.icon className="w-5 h-5 text-blue-600" />
+                    <span className="font-medium text-gray-900 text-sm">{skill.name}</span>
+                  </motion.div>
+                ))}
+              </div>
+              
+              <div className="mt-6">
+                <h4 className="font-semibold text-gray-700 mb-4">Additional Competencies</h4>
+                <div className="flex flex-wrap gap-2">
+                  {otherSkills.map((skill, index) => (
+                    <motion.span
+                      key={skill}
+                      initial={{ opacity: 0, scale: 0.9 }}
+                      whileInView={{ opacity: 1, scale: 1 }}
+                      transition={{ duration: 0.6, delay: index * 0.1 }}
                       viewport={{ once: true }}
-                      className="skill-progress"
-                    />
-                  </div>
-                </motion.div>
-              ))}
-            </div>
-          </div>
-        </motion.div>
+                      className="bg-blue-100 text-blue-700 px-3 py-2 rounded-lg text-sm font-medium"
+                    >
+                      {skill}
+                    </motion.span>
+                  ))}
+                </div>
+              </div>
+            </motion.div>
 
-        {/* Certifications */}
-        <motion.div
-          initial={{ opacity: 0, y: 30 }}
-          whileInView={{ opacity: 1, y: 0 }}
-          transition={{ duration: 0.8 }}
-          viewport={{ once: true }}
-        >
-          <div className="card p-8">
-            <h3 className="heading-md mb-8 text-center">Certifications & Licenses</h3>
-            
-            <div className="grid-responsive">
-              {certifications.map((cert, index) => (
-                <motion.div
-                  key={cert.title}
-                  initial={{ opacity: 0, y: 20 }}
-                  whileInView={{ opacity: 1, y: 0 }}
-                  transition={{ duration: 0.6, delay: index * 0.1 }}
-                  viewport={{ once: true }}
-                  className="card-featured p-6 text-center"
-                >
-                  <div className="w-16 h-16 accent-gradient rounded-2xl flex items-center justify-center mx-auto mb-4">
-                    <cert.icon className="w-8 h-8 text-white" />
-                  </div>
-                  
-                  <h4 className="text-lg font-bold text-gray-900 mb-2">{cert.title}</h4>
-                  <p className="text-gray-600 text-sm mb-3">{cert.credential}</p>
-                  
-                  <div className="flex items-center justify-between text-xs">
-                    <span className="text-gray-500">Year: {cert.year}</span>
-                    <span className="badge-success">{cert.status}</span>
-                  </div>
-                </motion.div>
-              ))}
-            </div>
+            {/* Languages */}
+            <motion.div
+              initial={{ opacity: 0, y: 30 }}
+              whileInView={{ opacity: 1, y: 0 }}
+              transition={{ duration: 0.8, delay: 0.6 }}
+              viewport={{ once: true }}
+              className="card p-8"
+            >
+              <h3 className="text-xl font-bold text-gray-900 mb-6 text-center">Languages</h3>
+              <div className="space-y-4">
+                {languages.map((language, index) => (
+                  <motion.div
+                    key={language.name}
+                    initial={{ opacity: 0, x: -20 }}
+                    whileInView={{ opacity: 1, x: 0 }}
+                    transition={{ duration: 0.6, delay: index * 0.1 }}
+                    viewport={{ once: true }}
+                    className="flex items-center justify-between p-4 bg-gray-50 rounded-lg hover:bg-gray-100 transition-colors duration-300"
+                  >
+                    <span className="font-semibold text-gray-900">{language.name}</span>
+                    <span className="text-blue-600 font-medium text-sm">{language.proficiency}</span>
+                  </motion.div>
+                ))}
+              </div>
+            </motion.div>
           </div>
-        </motion.div>
+        </div>
       </div>
     </section>
   );

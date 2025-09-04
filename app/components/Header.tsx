@@ -39,11 +39,7 @@ const Header = () => {
       initial={{ y: -100 }}
       animate={{ y: 0 }}
       transition={{ duration: 0.6 }}
-      className={`fixed top-0 left-0 right-0 z-50 transition-all duration-300 ${
-        isScrolled 
-          ? 'bg-white/95 backdrop-blur-sm shadow-lg border-b border-gray-200' 
-          : 'bg-gray-900/90 backdrop-blur-sm'
-      }`}
+      className="fixed top-0 left-0 right-0 z-50 bg-gray-900/95 backdrop-blur-sm shadow-lg border-b border-gray-800 transition-all duration-300"
     >
       <nav className="container">
         <div className="flex items-center justify-between py-4">
@@ -56,10 +52,10 @@ const Header = () => {
               <Award className="w-6 h-6 text-white" />
             </div>
             <div className="hidden sm:block">
-              <div className={`font-bold text-lg ${isScrolled ? 'text-gray-900' : 'text-white'}`}>
+              <div className="font-bold text-lg text-white">
                 Adarsh Mandal
               </div>
-              <div className={`text-sm ${isScrolled ? 'text-gray-600' : 'text-white/80'}`}>
+              <div className="text-sm text-gray-300">
                 Civil Engineer
               </div>
             </div>
@@ -74,7 +70,7 @@ const Header = () => {
                 animate={{ opacity: 1, y: 0 }}
                 transition={{ duration: 0.6, delay: index * 0.1 }}
                 onClick={() => scrollToSection(item.href)}
-                className={`nav-link ${isScrolled ? 'text-gray-700 hover:text-blue-600' : 'text-white hover:text-blue-200'}`}
+                className="nav-link text-gray-300 hover:text-blue-400"
               >
                 {item.label}
               </motion.button>
@@ -85,19 +81,15 @@ const Header = () => {
           <div className="hidden xl:flex items-center gap-6">
             <a
               href="tel:+9779811272899"
-              className={`flex items-center gap-2 transition-colors duration-200 ${
-                isScrolled ? 'text-gray-700 hover:text-blue-600' : 'text-white hover:text-blue-200'
-              }`}
+              className="flex items-center gap-2 text-gray-300 hover:text-blue-400 transition-colors duration-200"
             >
               <Phone className="w-4 h-4" />
               <span className="text-sm font-medium">+977 9811272899</span>
             </a>
-            <div className={`w-px h-6 ${isScrolled ? 'bg-gray-300' : 'bg-white/30'}`}></div>
+            <div className="w-px h-6 bg-gray-600"></div>
             <a
               href="mailto:adarsh.mandal.143@gmail.com"
-              className={`flex items-center gap-2 transition-colors duration-200 ${
-                isScrolled ? 'text-gray-700 hover:text-blue-600' : 'text-white hover:text-blue-200'
-              }`}
+              className="flex items-center gap-2 text-gray-300 hover:text-blue-400 transition-colors duration-200"
             >
               <Mail className="w-4 h-4" />
               <span className="text-sm font-medium">Email</span>
@@ -107,9 +99,7 @@ const Header = () => {
           {/* Mobile Menu Button */}
           <button
             onClick={() => setIsMenuOpen(!isMenuOpen)}
-            className={`lg:hidden p-2 rounded-lg transition-colors duration-200 ${
-              isScrolled ? 'text-gray-700 hover:bg-gray-100' : 'text-white hover:bg-white/10'
-            }`}
+            className="lg:hidden p-2 rounded-lg text-white hover:bg-gray-800 transition-colors duration-200"
             aria-label="Toggle menu"
           >
             {isMenuOpen ? <X className="w-6 h-6" /> : <Menu className="w-6 h-6" />}
@@ -126,7 +116,7 @@ const Header = () => {
           transition={{ duration: 0.3 }}
           className="lg:hidden overflow-hidden"
         >
-          <div className={`py-4 space-y-4 border-t ${isScrolled ? 'border-gray-200' : 'border-white/20'}`}>
+          <div className="py-4 space-y-4 border-t border-gray-700">
             {navItems.map((item, index) => (
               <motion.button
                 key={item.href}
@@ -137,30 +127,24 @@ const Header = () => {
                 }}
                 transition={{ duration: 0.3, delay: index * 0.05 }}
                 onClick={() => scrollToSection(item.href)}
-                className={`block w-full text-left font-medium transition-colors duration-200 py-2 ${
-                  isScrolled ? 'text-gray-700 hover:text-blue-600' : 'text-white hover:text-blue-200'
-                }`}
+                className="block w-full text-left font-medium py-2 text-gray-300 hover:text-blue-400 transition-colors duration-200"
               >
                 {item.label}
               </motion.button>
             ))}
             
             {/* Mobile Contact */}
-            <div className={`pt-4 border-t space-y-3 ${isScrolled ? 'border-gray-200' : 'border-white/20'}`}>
+            <div className="pt-4 border-t border-gray-700 space-y-3">
               <a
                 href="tel:+9779811272899"
-                className={`flex items-center gap-3 transition-colors duration-200 ${
-                  isScrolled ? 'text-gray-700 hover:text-blue-600' : 'text-white hover:text-blue-200'
-                }`}
+                className="flex items-center gap-3 text-gray-300 hover:text-blue-400 transition-colors duration-200"
               >
                 <Phone className="w-4 h-4" />
                 <span className="text-sm font-medium">+977 9811272899</span>
               </a>
               <a
                 href="mailto:adarsh.mandal.143@gmail.com"
-                className={`flex items-center gap-3 transition-colors duration-200 ${
-                  isScrolled ? 'text-gray-700 hover:text-blue-600' : 'text-white hover:text-blue-200'
-                }`}
+                className="flex items-center gap-3 text-gray-300 hover:text-blue-400 transition-colors duration-200"
               >
                 <Mail className="w-4 h-4" />
                 <span className="text-sm font-medium">adarsh.mandal.143@gmail.com</span>

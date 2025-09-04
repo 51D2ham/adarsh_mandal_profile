@@ -8,50 +8,53 @@ A modern, responsive portfolio website for Adarsh Mandal, a professional Civil E
 - **Mobile-First Design**: Fully responsive across all devices
 - **Accessibility Compliant**: WCAG AA standards with proper ARIA labels
 - **Interactive Portfolio**: Filterable project gallery with smooth animations
-- **Smart Contact Form**: Enhanced form with improved validation
+- **Smart Contact Form**: Enhanced form with email notifications
 - **Secure Resume Download**: Optimized download with error handling
 - **Performance Optimized**: Throttled scroll events and memoized calculations
-- **Environment Configured**: Easy deployment with environment variables
-- **Analytics Ready**: Configurable Google Analytics integration
-- **Schema Markup**: JSON-LD structured data for better SEO
-- **Security Headers**: Built-in security configurations
-- **Static Export Ready**: Optimized for static hosting platforms
+- **Contact Slider**: Quick access contact options
+- **Professional Animations**: Smooth Framer Motion animations
 - **Modern Design System**: Consistent, scalable design components
-- **Smooth Animations**: Hardware-accelerated transitions
-- **Production Ready**: Optimized for performance and accessibility
 
 ## 🛠️ Tech Stack
 
 - **Framework**: Next.js 15 (App Router)
 - **Styling**: Tailwind CSS with custom design system
-- **Animations**: Framer Motion with custom keyframes
+- **Animations**: Framer Motion
 - **Icons**: Lucide React
 - **Language**: TypeScript
-- **UI Components**: Custom component library
+- **Email Service**: Nodemailer with Gmail
 - **Deployment**: Vercel (recommended)
 
 ## 📁 Project Structure
 
-\`\`\`
+```
 ├── app/
+│   ├── api/
+│   │   └── contact/
+│   │       └── route.ts          # Contact form API endpoint
 │   ├── components/
-│   │   ├── Header.tsx
-│   │   ├── Hero.tsx
-│   │   ├── About.tsx
-│   │   ├── Experience.tsx
-│   │   ├── Portfolio.tsx
-│   │   ├── Skills.tsx
-│   │   ├── Contact.tsx
-│   │   └── Footer.tsx
-│   ├── globals.css
-│   ├── layout.tsx
-│   └── page.tsx
+│   │   ├── Header.tsx            # Navigation header
+│   │   ├── Hero.tsx              # Hero section with image slider
+│   │   ├── About.tsx             # About section
+│   │   ├── Experience.tsx        # Experience timeline
+│   │   ├── Portfolio.tsx         # Projects showcase
+│   │   ├── Skills.tsx            # Skills section
+│   │   ├── Contact.tsx           # Contact form
+│   │   ├── Footer.tsx            # Footer section
+│   │   ├── ScrollToTop.tsx       # Scroll to top button
+│   │   └── Preloader.tsx         # Loading animation
+│   ├── globals.css               # Global styles
+│   ├── layout.tsx                # Root layout
+│   └── page.tsx                  # Home page
 ├── public/
 │   ├── images/
-│   ├── sitemap.xml
-│   └── robots.txt
-└── README.md
-\`\`\`
+│   │   ├── 001.jpg              # Profile image 1
+│   │   └── 002.jpg              # Profile image 2
+│   ├── robots.txt               # SEO robots file
+│   └── sitemap.xml              # SEO sitemap
+├── .env.local.example           # Environment variables template
+└── README.md                    # This file
+```
 
 ## 🚀 Getting Started
 
@@ -59,144 +62,187 @@ A modern, responsive portfolio website for Adarsh Mandal, a professional Civil E
 
 - Node.js 18+ 
 - npm or yarn
+- Gmail account (for contact form)
 
 ### Installation
 
-1. Clone the repository:
-\`\`\`bash
-git clone https://github.com/adarshmandal/portfolio.git
-cd portfolio
-\`\`\`
+1. **Clone the repository:**
+```bash
+git clone <repository-url>
+cd career-website-AD
+```
 
-2. Install dependencies:
-\`\`\`bash
+2. **Install dependencies:**
+```bash
 npm install
-# or
-yarn install
-\`\`\`
+```
 
-3. Set up environment variables:
-\`\`\`bash
+3. **Set up environment variables:**
+```bash
 cp .env.local.example .env.local
-\`\`\`
-Edit `.env.local` with your configuration.
+```
 
-4. Run the development server:
-\`\`\`bash
-npm run dev
-# or
-yarn dev
-\`\`\`
+Edit `.env.local` with your configuration:
+```env
+# Gmail Configuration (Required for contact form)
+GMAIL_USER=your-email@gmail.com
+GMAIL_APP_PASSWORD=your-app-password
 
-5. Open [http://localhost:3000](http://localhost:3000) in your browser.
-
-## 📝 Configuration
-
-### Environment Variables
-
-Copy `.env.local.example` to `.env.local` and configure:
-
-\`\`\`env
+# Google Drive Resume (Optional)
 NEXT_PUBLIC_RESUME_FILE_ID=your_google_drive_file_id
+
+# Google Analytics (Optional)
 NEXT_PUBLIC_GA_MEASUREMENT_ID=G-XXXXXXXXXX
-\`\`\`
+```
 
-### Google Drive Resume Download
+4. **Run the development server:**
+```bash
+npm run dev
+```
 
-1. Upload your resume to Google Drive
-2. Right-click → Share → Get link
-3. Copy the file ID from the URL
-4. Add it to your `.env.local`
+5. **Open [http://localhost:3000](http://localhost:3000) in your browser.**
 
-### Google Analytics
+## 📧 Gmail Setup for Contact Form
 
-1. Create a Google Analytics account
-2. Get your Measurement ID (starts with G-)
-3. Add it to your `.env.local`
+### Step 1: Enable 2-Factor Authentication
+1. Go to your Google Account settings
+2. Navigate to Security
+3. Enable 2-Step Verification
 
-### Contact Form
+### Step 2: Generate App Password
+1. In Google Account settings, go to Security
+2. Under "2-Step Verification", click on "App passwords"
+3. Select "Mail" and "Other (custom name)"
+4. Enter "Portfolio Contact Form"
+5. Copy the generated 16-character password
 
-The contact form includes validation and error handling. To make it functional:
+### Step 3: Configure Environment Variables
+```env
+GMAIL_USER=your-email@gmail.com
+GMAIL_APP_PASSWORD=your-16-character-app-password
+```
 
-1. Set up a backend service (e.g., Formspree, Netlify Forms)
-2. Update the form submission logic in \`Contact.tsx\`
+## 📱 Google Drive Resume Setup (Optional)
+
+1. **Upload your resume to Google Drive**
+2. **Right-click → Share → Get link**
+3. **Make sure it's set to "Anyone with the link can view"**
+4. **Copy the file ID from the URL:**
+   ```
+   https://drive.google.com/file/d/FILE_ID_HERE/view
+   ```
+5. **Add to `.env.local`:**
+   ```env
+   NEXT_PUBLIC_RESUME_FILE_ID=FILE_ID_HERE
+   ```
 
 ## 🎨 Customization
 
-### Colors & Branding
-
-The website uses a blue color scheme. To customize:
-
-1. Update the color classes in Tailwind CSS
-2. Modify the gradient backgrounds in components
-3. Update the favicon and images
-
-### Content
-
+### Personal Information
 Update the following files with your information:
 
-- Personal details in \`Hero.tsx\`
-- Experience data in \`Experience.tsx\`
-- Projects in \`Portfolio.tsx\`
-- Skills in \`Skills.tsx\`
-- Contact information throughout components
+- **Hero Section**: `app/components/Hero.tsx`
+- **About Section**: `app/components/About.tsx`
+- **Experience**: `app/components/Experience.tsx`
+- **Projects**: `app/components/Portfolio.tsx`
+- **Skills**: `app/components/Skills.tsx`
+- **Contact Info**: `app/components/Contact.tsx` and `app/components/Footer.tsx`
 
-## 📱 Responsive Design
+### Images
+Replace the profile images in `public/images/`:
+- `001.jpg` - Primary profile image
+- `002.jpg` - Secondary profile image
 
-The website is fully responsive with breakpoints:
+### Colors & Branding
+The website uses a blue color scheme. To customize:
+1. Update colors in `app/globals.css`
+2. Modify the gradient backgrounds in components
+3. Update the favicon and meta images
 
-- Mobile: < 768px
-- Tablet: 768px - 1024px
-- Desktop: > 1024px
+### SEO Configuration
+Update `app/layout.tsx` with your:
+- Meta title and description
+- Open Graph tags
+- Twitter Card tags
+- Structured data (JSON-LD)
+
+## 📊 Performance Features
+
+- **Next.js Image Optimization**: Automatic image optimization
+- **Code Splitting**: Automatic code splitting for optimal loading
+- **Lazy Loading**: Components load as needed
+- **Optimized Fonts**: Google Fonts optimization
+- **Minimal JavaScript Bundle**: Only essential JavaScript
 
 ## ♿ Accessibility Features
 
-- Semantic HTML structure
-- ARIA labels and roles
-- Keyboard navigation support
-- Screen reader compatibility
-- High contrast ratios
-- Focus indicators
+- **Semantic HTML**: Proper HTML structure
+- **ARIA Labels**: Screen reader support
+- **Keyboard Navigation**: Full keyboard accessibility
+- **High Contrast**: Proper color contrast ratios
+- **Focus Indicators**: Clear focus states
 
 ## 🔍 SEO Features
 
-- Meta tags optimization
-- Open Graph tags
-- Twitter Card tags
-- JSON-LD structured data
-- Sitemap.xml
-- Robots.txt
-- Semantic HTML
-
-## 📊 Performance
-
-- Next.js Image optimization
-- Code splitting
-- Lazy loading
-- Optimized fonts
-- Minimal JavaScript bundle
+- **Meta Tags**: Comprehensive meta tag optimization
+- **Open Graph**: Social media sharing optimization
+- **Twitter Cards**: Twitter sharing optimization
+- **JSON-LD**: Structured data for search engines
+- **Sitemap**: XML sitemap for search engines
+- **Robots.txt**: Search engine crawling instructions
 
 ## 🚀 Deployment
 
 ### Vercel (Recommended)
-
-1. Push your code to GitHub
-2. Connect your repository to Vercel
-3. Deploy automatically
+1. **Push your code to GitHub**
+2. **Connect your repository to Vercel**
+3. **Add environment variables in Vercel dashboard**
+4. **Deploy automatically**
 
 ### Other Platforms
-
 The website can be deployed to:
-
 - Netlify
 - AWS Amplify
-- GitHub Pages (with static export)
+- Railway
+- Render
 - Any static hosting service
 
-For static export:
-\`\`\`bash
-npm run export
-\`\`\`
+### Environment Variables for Production
+Make sure to add these in your deployment platform:
+```env
+GMAIL_USER=your-email@gmail.com
+GMAIL_APP_PASSWORD=your-app-password
+NEXT_PUBLIC_RESUME_FILE_ID=your-file-id (optional)
+NEXT_PUBLIC_GA_MEASUREMENT_ID=your-ga-id (optional)
+```
+
+## 📝 Scripts
+
+```bash
+# Development
+npm run dev          # Start development server
+
+# Production
+npm run build        # Build for production
+npm run start        # Start production server
+
+# Linting
+npm run lint         # Run ESLint
+```
+
+## 🔧 Configuration Files
+
+- **`next.config.js`**: Next.js configuration
+- **`tailwind.config.ts`**: Tailwind CSS configuration
+- **`tsconfig.json`**: TypeScript configuration
+- **`postcss.config.mjs`**: PostCSS configuration
+
+## 📞 Support
+
+For support or questions:
+- **Email**: adarsh.mandal.143@gmail.com
+- **Phone**: +977 9811272899
+- **Location**: Birgunj, Nepal
 
 ## 📄 License
 
@@ -206,15 +252,8 @@ This project is open source and available under the [MIT License](LICENSE).
 
 Contributions, issues, and feature requests are welcome!
 
-## 📞 Contact
-
-**Adarsh Mandal**
-- Email: adarsh.mandal.143@gmail.com
-- Phone: +977 9811272899
-- Location: Birgunj, Nepal
-- NEC Registration: 85377
-
 ---
 
-Built with ❤️ using Next.js and Tailwind CSS
-\`\`\`
+**Built with ❤️ using Next.js 15 and Tailwind CSS**
+
+*Professional Portfolio for Adarsh Mandal - Civil Engineer (NEC Registration #85377)*

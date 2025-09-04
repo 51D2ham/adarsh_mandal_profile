@@ -7,59 +7,80 @@ const Experience = () => {
   const education = [
     {
       id: 1,
-      title: 'Bachelor of Engineering (Civil)',
-      institution: 'Tribhuvan University',
+      title: 'Bachelor of Civil Engineering',
+      institution: 'Cosmos College of Management and Technology, PU',
       location: 'Kathmandu, Nepal',
-      period: '2020 - 2024',
+      period: '2019 - 2023',
       type: 'Full-time',
-      description: 'Comprehensive civil engineering program covering structural design, construction management, and infrastructure development.',
+      description: 'Comprehensive civil engineering program with major project on rural road design and active participation in student organizations.',
       achievements: [
-        'Graduated with distinction in structural engineering courses',
-        'Completed major project on sustainable construction materials',
-        'Active member of Civil Engineering Students Association',
-        'Participated in national engineering competitions'
+        'Major Project: Rural Road Design & Cost Estimation',
+        'Executive Member - Cosmos CESS',
+        'Participant - Hult Prize 2020/21'
+      ]
+    },
+    {
+      id: 2,
+      title: 'Higher Secondary Education (+2)',
+      institution: 'Nepal Mega College, Babarmahal',
+      location: 'Kathmandu, Nepal',
+      period: '2016 - 2018',
+      type: 'Science Stream',
+      description: 'Science stream education with strong foundation in Mathematics and Physics, preparing for engineering studies.',
+      achievements: [
+        'Science background with Mathematics & Physics focus',
+        'Engineering entrance preparation'
+      ]
+    },
+    {
+      id: 3,
+      title: 'School Leaving Certificate (SLC)',
+      institution: 'Gyan Vatika Boarding English School',
+      location: 'Birgunj, Nepal',
+      period: '2014',
+      type: 'Secondary Education',
+      description: 'Secondary education with strong academic performance and active participation in school activities.',
+      achievements: [
+        'Strong foundation in core subjects',
+        'Active in school activities'
       ]
     }
   ];
 
-  const internships = [
+  const experiences = [
     {
       id: 1,
-      title: 'Civil Engineering Intern',
-      company: 'Local Construction Company',
-      location: 'Birgunj, Nepal',
-      period: 'Summer 2023',
-      type: 'Internship',
-      description: 'Gained hands-on experience in construction site management and quality control processes.',
+      title: 'Civil Engineer',
+      company: 'Abash Multinational Pvt Ltd',
+      location: 'Kathmandu, Nepal',
+      period: '2024 - Present',
+      type: 'Professional',
+      description: 'Working as a civil engineer on diverse infrastructure projects including healthcare facilities, hospitality developments, and major highway construction.',
       achievements: [
-        'Assisted in site surveying and layout planning',
-        'Learned concrete testing and quality assurance procedures',
-        'Observed project management and coordination activities',
-        'Prepared daily progress reports and documentation'
+        'Hospital construction project management',
+        'Resort development planning and execution',
+        '108 km highway construction supervision',
+        'Infrastructure design and quality control'
+      ]
+    },
+    {
+      id: 2,
+      title: 'Smart Road Design Intern',
+      company: 'Engineering Consultancy',
+      location: 'Nepal',
+      period: '2023',
+      type: 'Internship',
+      description: 'Specialized internship in smart road technology with focus on rural road development and modern infrastructure solutions.',
+      achievements: [
+        'Rural road alignment surveys and analysis',
+        'Technical drawings and design calculations',
+        'Cost estimation and project documentation',
+        'Smart road technology implementation'
       ]
     }
   ];
 
-  const certifications = [
-    {
-      title: 'Nepal Engineering Council Registration',
-      issuer: 'NEC',
-      date: '2024',
-      credential: '#85377'
-    },
-    {
-      title: 'AutoCAD Certification',
-      issuer: 'Autodesk',
-      date: '2023',
-      credential: 'Verified'
-    },
-    {
-      title: 'Construction Safety Training',
-      issuer: 'Safety Institute',
-      date: '2023',
-      credential: 'Completed'
-    }
-  ];
+
 
   return (
     <section id="experience" className="section bg-gray-50">
@@ -100,62 +121,35 @@ const Experience = () => {
             Education
           </motion.h3>
 
-          {education.map((edu, index) => (
-            <motion.div
-              key={edu.id}
-              initial={{ opacity: 0, y: 30 }}
-              whileInView={{ opacity: 1, y: 0 }}
-              transition={{ duration: 0.8, delay: index * 0.2 }}
-              viewport={{ once: true }}
-              className="card p-8 mb-8"
-            >
-              <div className="grid-responsive-2 gap-8">
-                {/* Left - Timeline */}
-                <div className="text-center lg:text-left">
-                  <div className="w-16 h-16 bg-blue-100 rounded-2xl flex items-center justify-center mx-auto lg:mx-0 mb-4">
-                    <GraduationCap className="w-8 h-8 text-blue-600" />
+          <div className="space-y-6">
+            {education.map((edu, index) => (
+              <motion.div
+                key={edu.id}
+                initial={{ opacity: 0, y: 20 }}
+                whileInView={{ opacity: 1, y: 0 }}
+                transition={{ duration: 0.6, delay: index * 0.1 }}
+                viewport={{ once: true }}
+                className="card p-6 hover:shadow-lg transition-all duration-300"
+              >
+                <div className="flex items-start gap-4">
+                  <div className="w-12 h-12 bg-blue-100 rounded-xl flex items-center justify-center flex-shrink-0">
+                    <GraduationCap className="w-6 h-6 text-blue-600" />
                   </div>
-                  <div className="space-y-2">
-                    <div className="text-blue-600 font-bold text-xl">{edu.period}</div>
-                    <div className="text-gray-600 font-medium">{edu.type}</div>
-                  </div>
-                </div>
-
-                {/* Right - Content */}
-                <div className="space-y-6">
-                  <div>
-                    <h4 className="text-3xl font-bold text-blue-600 mb-4">{edu.title}</h4>
-                    <div className="space-y-2 mb-4">
-                      <div className="flex items-center gap-3">
-                        <Award className="w-5 h-5 text-blue-600" />
-                        <span className="font-bold text-gray-800 text-lg">{edu.institution}</span>
-                      </div>
-                      <div className="flex items-center gap-3">
-                        <MapPin className="w-5 h-5 text-blue-600" />
-                        <span className="text-gray-600">{edu.location}</span>
-                      </div>
+                  <div className="flex-1">
+                    <div className="flex items-start justify-between mb-2">
+                      <h4 className="text-xl font-bold text-gray-900">{edu.title}</h4>
+                      <span className="text-blue-600 font-semibold text-sm">{edu.period}</span>
                     </div>
-                    <p className="text-gray-700 text-lg leading-relaxed">{edu.description}</p>
-                  </div>
-
-                  <div>
-                    <h5 className="text-xl font-bold text-blue-600 mb-4">Key Achievements</h5>
-                    <ul className="space-y-3">
-                      {edu.achievements.map((achievement, i) => (
-                        <li key={i} className="flex items-start gap-4 text-gray-700">
-                          <div className="w-2 h-2 bg-blue-600 rounded-full mt-3 flex-shrink-0"></div>
-                          <span className="text-lg leading-relaxed">{achievement}</span>
-                        </li>
-                      ))}
-                    </ul>
+                    <div className="text-gray-600 font-medium mb-1">{edu.institution}</div>
+                    <div className="text-gray-500 text-sm">{edu.location}</div>
                   </div>
                 </div>
-              </div>
-            </motion.div>
-          ))}
+              </motion.div>
+            ))}
+          </div>
         </div>
 
-        {/* Internship Section */}
+        {/* Practical Experience Section */}
         <div className="mb-20">
           <motion.h3
             initial={{ opacity: 0, x: -30 }}
@@ -168,97 +162,45 @@ const Experience = () => {
             Practical Experience
           </motion.h3>
 
-          {internships.map((intern, index) => (
-            <motion.div
-              key={intern.id}
-              initial={{ opacity: 0, y: 30 }}
-              whileInView={{ opacity: 1, y: 0 }}
-              transition={{ duration: 0.8, delay: index * 0.2 }}
-              viewport={{ once: true }}
-              className="card p-8 mb-8"
-            >
-              <div className="grid-responsive-2 gap-8">
-                {/* Left - Timeline */}
-                <div className="text-center lg:text-left">
-                  <div className="w-16 h-16 bg-blue-100 rounded-2xl flex items-center justify-center mx-auto lg:mx-0 mb-4">
-                    <Users className="w-8 h-8 text-blue-600" />
-                  </div>
-                  <div className="space-y-2">
-                    <div className="text-blue-600 font-bold text-xl">{intern.period}</div>
-                    <div className="text-gray-600 font-medium">{intern.type}</div>
-                  </div>
-                </div>
-
-                {/* Right - Content */}
-                <div className="space-y-6">
-                  <div>
-                    <h4 className="text-3xl font-bold text-blue-600 mb-4">{intern.title}</h4>
-                    <div className="space-y-2 mb-4">
-                      <div className="flex items-center gap-3">
-                        <Award className="w-5 h-5 text-blue-600" />
-                        <span className="font-bold text-gray-800 text-lg">{intern.company}</span>
-                      </div>
-                      <div className="flex items-center gap-3">
-                        <MapPin className="w-5 h-5 text-blue-600" />
-                        <span className="text-gray-600">{intern.location}</span>
-                      </div>
-                    </div>
-                    <p className="text-gray-700 text-lg leading-relaxed">{intern.description}</p>
-                  </div>
-
-                  <div>
-                    <h5 className="text-xl font-bold text-blue-600 mb-4">Learning Outcomes</h5>
-                    <ul className="space-y-3">
-                      {intern.achievements.map((achievement, i) => (
-                        <li key={i} className="flex items-start gap-4 text-gray-700">
-                          <div className="w-2 h-2 bg-blue-600 rounded-full mt-3 flex-shrink-0"></div>
-                          <span className="text-lg leading-relaxed">{achievement}</span>
-                        </li>
-                      ))}
-                    </ul>
-                  </div>
-                </div>
-              </div>
-            </motion.div>
-          ))}
-        </div>
-
-        {/* Certifications */}
-        <motion.div
-          initial={{ opacity: 0, y: 30 }}
-          whileInView={{ opacity: 1, y: 0 }}
-          transition={{ duration: 0.8 }}
-          viewport={{ once: true }}
-        >
-          <h3 className="heading-md mb-12 flex items-center gap-3">
-            <Award className="w-8 h-8 text-blue-600" />
-            Certifications & Licenses
-          </h3>
-          
-          <div className="grid-responsive gap-8">
-            {certifications.map((cert, index) => (
+          <div className="space-y-6">
+            {experiences.map((exp, index) => (
               <motion.div
-                key={cert.title}
+                key={exp.id}
                 initial={{ opacity: 0, y: 20 }}
                 whileInView={{ opacity: 1, y: 0 }}
                 transition={{ duration: 0.6, delay: index * 0.1 }}
                 viewport={{ once: true }}
-                className="card-featured p-8 text-center"
+                className="card p-6 hover:shadow-lg transition-all duration-300"
               >
-                <div className="w-20 h-20 bg-blue-100 rounded-2xl flex items-center justify-center mx-auto mb-6">
-                  <Award className="w-10 h-10 text-blue-600" />
-                </div>
-                
-                <h4 className="text-xl font-bold text-blue-600 mb-3">{cert.title}</h4>
-                <p className="text-gray-600 font-semibold text-lg mb-4">{cert.issuer}</p>
-                <div className="space-y-2">
-                  <div className="text-gray-800 font-medium">{cert.date}</div>
-                  <div className="text-blue-600 font-bold">{cert.credential}</div>
+                <div className="flex items-start gap-4">
+                  <div className="w-12 h-12 bg-blue-100 rounded-xl flex items-center justify-center flex-shrink-0">
+                    <Users className="w-6 h-6 text-blue-600" />
+                  </div>
+                  <div className="flex-1">
+                    <div className="flex items-start justify-between mb-2">
+                      <h4 className="text-xl font-bold text-gray-900">{exp.title}</h4>
+                      <span className="text-blue-600 font-semibold text-sm">{exp.period}</span>
+                    </div>
+                    <div className="text-gray-600 font-medium mb-1">{exp.company}</div>
+                    <div className="text-gray-500 text-sm mb-3">{exp.location}</div>
+                    <p className="text-gray-700 text-sm mb-3">{exp.description}</p>
+                    
+                    <div className="grid grid-cols-1 md:grid-cols-2 gap-2">
+                      {exp.achievements.map((achievement, i) => (
+                        <div key={i} className="flex items-center gap-2 text-sm text-gray-600">
+                          <div className="w-1.5 h-1.5 bg-blue-600 rounded-full flex-shrink-0"></div>
+                          <span>{achievement}</span>
+                        </div>
+                      ))}
+                    </div>
+                  </div>
                 </div>
               </motion.div>
             ))}
           </div>
-        </motion.div>
+        </div>
+
+
       </div>
     </section>
   );

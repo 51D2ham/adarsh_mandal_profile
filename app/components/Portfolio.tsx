@@ -10,53 +10,73 @@ const Portfolio = () => {
   const projects = [
     {
       id: 1,
-      title: 'Residential Building Design',
-      category: 'academic',
-      description: 'Final year project: Structural design of a 5-story residential building with modern amenities and earthquake-resistant features.',
-      duration: '6 months',
-      budget: 'Academic Project',
-      team: '4 students',
+      title: 'Hospital Construction Project',
+      category: 'professional',
+      description: 'Leading civil engineering aspects of healthcare facility construction with focus on structural design, safety compliance, and project coordination.',
+      duration: 'Ongoing',
+      team: 'Engineering Team',
       location: 'Kathmandu, Nepal',
-      technologies: ['AutoCAD', 'STAAD Pro', 'Manual Calculations'],
-      status: 'Completed',
+      technologies: ['Structural Design', 'AutoCAD', 'Project Management', 'Safety Compliance'],
+      status: 'In Progress',
       year: '2024'
     },
     {
       id: 2,
-      title: 'Highway Alignment Study',
-      category: 'academic',
-      description: 'Transportation engineering project focusing on optimal highway alignment design considering topography and environmental factors.',
-      duration: '4 months',
-      budget: 'Academic Project',
-      team: '3 students',
-      location: 'Birgunj-Kathmandu Route',
-      technologies: ['Civil 3D', 'Surveying', 'GIS'],
-      status: 'Completed',
-      year: '2023'
+      title: 'Resort Development Project',
+      category: 'professional',
+      description: 'Comprehensive infrastructure development for hospitality project including site planning, utilities design, and construction supervision.',
+      duration: 'Ongoing',
+      team: 'Development Team',
+      location: 'Nepal',
+      technologies: ['Site Planning', 'Infrastructure Design', 'Construction Management', 'AutoCAD'],
+      status: 'In Progress',
+      year: '2024'
     },
     {
       id: 3,
-      title: 'Water Supply System Design',
+      title: '108 KM Highway Construction',
+      category: 'professional',
+      description: 'Major highway infrastructure project involving design supervision, quality control, and construction management for large-scale transportation development.',
+      duration: 'Ongoing',
+      team: 'Highway Engineering Team',
+      location: 'Nepal',
+      technologies: ['Highway Design', 'Quality Control', 'Construction Supervision', 'Project Management'],
+      status: 'In Progress',
+      year: '2024'
+    },
+    {
+      id: 4,
+      title: 'Detail Survey, Design and Cost Estimation of Rural Road',
       category: 'academic',
-      description: 'Design of water distribution system for a small community including pipe network analysis and pump station design.',
-      duration: '3 months',
-      budget: 'Academic Project',
-      team: '2 students',
-      location: 'Rural Community Study',
-      technologies: ['EPANET', 'AutoCAD', 'Hydraulic Analysis'],
+      description: 'Major project focusing on comprehensive rural road development including detailed surveying, geometric design, and accurate cost estimation for sustainable infrastructure.',
+      duration: '8 months',
+      team: 'Individual Project',
+      location: 'Rural Area, Nepal',
+      technologies: ['AutoCAD', 'Surveying', 'Cost Estimation', 'Smart Road Technology'],
       status: 'Completed',
       year: '2023'
     },
     {
-      id: 4,
-      title: 'Construction Site Internship',
+      id: 5,
+      title: 'Water Resource Management',
+      category: 'academic',
+      description: 'Minor project focused on water resource planning and management, including watershed analysis and sustainable water utilization strategies.',
+      duration: '4 months',
+      team: 'Group Project',
+      location: 'Study Area, Nepal',
+      technologies: ['ARC GIS', 'AutoCAD', 'Hydrological Analysis'],
+      status: 'Completed',
+      year: '2022'
+    },
+    {
+      id: 6,
+      title: 'Smart Road Design Internship',
       category: 'internship',
-      description: 'Hands-on experience in construction management, quality control, and site supervision during summer internship.',
-      duration: '2 months',
-      budget: 'Internship',
-      team: 'Site Team',
-      location: 'Birgunj, Nepal',
-      technologies: ['Site Management', 'Quality Testing', 'Progress Monitoring'],
+      description: 'Practical internship on "Design road on smart road" involving detailed survey, design calculations, and cost estimation of rural road infrastructure.',
+      duration: '3 months',
+      team: 'Engineering Team',
+      location: 'Nepal',
+      technologies: ['Smart Road Technology', 'Surveying', 'AutoCAD', 'Cost Analysis'],
       status: 'Completed',
       year: '2023'
     }
@@ -64,6 +84,7 @@ const Portfolio = () => {
 
   const categories = [
     { id: 'all', label: 'All Projects' },
+    { id: 'professional', label: 'Professional Work' },
     { id: 'academic', label: 'Academic Projects' },
     { id: 'internship', label: 'Internship' }
   ];
@@ -74,8 +95,8 @@ const Portfolio = () => {
 
   const getStatusColor = (status: string) => {
     switch (status) {
-      case 'Completed': return 'badge-success';
-      case 'In Progress': return 'bg-yellow-100 text-yellow-800';
+      case 'Completed': return 'bg-green-100 text-green-800';
+      case 'In Progress': return 'bg-blue-100 text-blue-800';
       default: return 'bg-gray-100 text-gray-800';
     }
   };
@@ -130,90 +151,58 @@ const Portfolio = () => {
         </motion.div>
 
         {/* Projects Grid */}
-        <div className="grid grid-cols-1 lg:grid-cols-2 gap-8 mb-16">
+        <div className="space-y-6 mb-16">
           {filteredProjects.map((project, index) => (
             <motion.div
               key={project.id}
-              initial={{ opacity: 0, y: 30 }}
+              initial={{ opacity: 0, y: 20 }}
               whileInView={{ opacity: 1, y: 0 }}
               transition={{ duration: 0.6, delay: index * 0.1 }}
               viewport={{ once: true }}
-              className="card group hover:shadow-xl transition-all duration-300 overflow-hidden"
+              className="card p-6 hover:shadow-lg transition-all duration-300"
             >
-              {/* Project Header */}
-              <div className="bg-gradient-to-r from-blue-50 to-blue-100 p-6 border-b">
-                <div className="flex items-center justify-between mb-3">
-                  <div className="w-10 h-10 accent-gradient rounded-lg flex items-center justify-center">
-                    <Building2 className="w-5 h-5 text-white" />
-                  </div>
-                  <div className="flex items-center gap-2">
-                    <span className={`px-3 py-1 rounded-full text-xs font-semibold ${getStatusColor(project.status)}`}>
-                      {project.status}
-                    </span>
-                    <span className="bg-white px-3 py-1 rounded-full text-xs font-semibold text-gray-600">
-                      {project.year}
-                    </span>
-                  </div>
+              <div className="flex items-start gap-4">
+                <div className="w-12 h-12 bg-blue-100 rounded-xl flex items-center justify-center flex-shrink-0">
+                  <Building2 className="w-6 h-6 text-blue-600" />
                 </div>
-                
-                <h3 className="text-xl font-bold text-gray-900 mb-2 group-hover:text-blue-600 transition-colors duration-300">
-                  {project.title}
-                </h3>
-                
-                <p className="text-gray-600 text-sm leading-relaxed">
-                  {project.description}
-                </p>
-              </div>
-
-              {/* Project Body */}
-              <div className="p-6 space-y-6">
-                {/* Project Stats */}
-                <div className="grid grid-cols-2 gap-4">
-                  <div className="flex items-center gap-3 p-3 bg-gray-50 rounded-lg">
-                    <Calendar className="w-4 h-4 text-blue-600" />
-                    <div>
-                      <div className="text-xs text-gray-500 font-medium">Duration</div>
-                      <div className="text-sm font-semibold text-gray-900">{project.duration}</div>
+                <div className="flex-1">
+                  <div className="flex items-start justify-between mb-2">
+                    <h4 className="text-xl font-bold text-gray-900">{project.title}</h4>
+                    <div className="flex items-center gap-2">
+                      <span className={`px-2 py-1 rounded-lg text-xs font-semibold ${getStatusColor(project.status)}`}>
+                        {project.status}
+                      </span>
+                      <span className="text-blue-600 font-semibold text-sm">{project.year}</span>
+                    </div>
+                  </div>
+                  <p className="text-gray-700 text-sm mb-4">{project.description}</p>
+                  
+                  <div className="grid grid-cols-1 md:grid-cols-3 gap-4 mb-4">
+                    <div className="flex items-center gap-2 text-sm text-gray-600">
+                      <Calendar className="w-4 h-4 text-blue-600" />
+                      <span>{project.duration}</span>
+                    </div>
+                    <div className="flex items-center gap-2 text-sm text-gray-600">
+                      <Users className="w-4 h-4 text-blue-600" />
+                      <span>{project.team}</span>
+                    </div>
+                    <div className="flex items-center gap-2 text-sm text-gray-600">
+                      <MapPin className="w-4 h-4 text-blue-600" />
+                      <span>{project.location}</span>
                     </div>
                   </div>
                   
-                  <div className="flex items-center gap-3 p-3 bg-gray-50 rounded-lg">
-                    <Users className="w-4 h-4 text-blue-600" />
-                    <div>
-                      <div className="text-xs text-gray-500 font-medium">Team</div>
-                      <div className="text-sm font-semibold text-gray-900">{project.team}</div>
-                    </div>
-                  </div>
-                  
-                  <div className="flex items-center gap-3 p-3 bg-gray-50 rounded-lg col-span-2">
-                    <MapPin className="w-4 h-4 text-blue-600" />
-                    <div>
-                      <div className="text-xs text-gray-500 font-medium">Location</div>
-                      <div className="text-sm font-semibold text-gray-900">{project.location}</div>
-                    </div>
-                  </div>
-                </div>
-
-                {/* Technologies */}
-                <div>
-                  <div className="text-sm font-semibold text-gray-900 mb-3">Technologies Used</div>
                   <div className="flex flex-wrap gap-2">
                     {project.technologies.map((tech) => (
                       <span
                         key={tech}
-                        className="bg-blue-100 text-blue-700 px-3 py-1 rounded-lg text-xs font-medium"
+                        className="bg-blue-100 text-blue-700 px-2 py-1 rounded-lg text-xs font-medium"
                       >
                         {tech}
                       </span>
                     ))}
                   </div>
                 </div>
-
-                {/* Action Button */}
-                <button className="w-full bg-gray-900 text-white py-3 rounded-lg font-semibold hover:bg-blue-600 transition-colors duration-300 flex items-center justify-center gap-2 group/btn">
-                  <ExternalLink className="w-4 h-4 group-hover/btn:translate-x-1 transition-transform duration-300" />
-                  View Project Details
-                </button>
               </div>
             </motion.div>
           ))}
@@ -225,29 +214,23 @@ const Portfolio = () => {
           whileInView={{ opacity: 1, y: 0 }}
           transition={{ duration: 0.8 }}
           viewport={{ once: true }}
-          className="text-center"
+          className="grid grid-cols-2 md:grid-cols-4 gap-6"
         >
-          <div className="bg-gradient-to-r from-blue-600 to-blue-700 text-white rounded-2xl p-10">
-            <h3 className="text-2xl font-bold mb-8">Portfolio Summary</h3>
-            
-            <div className="grid grid-cols-2 md:grid-cols-4 gap-6">
-              <div className="text-center">
-                <div className="text-3xl font-bold mb-2">4</div>
-                <div className="text-blue-100 font-medium text-sm">Projects Completed</div>
-              </div>
-              <div className="text-center">
-                <div className="text-3xl font-bold mb-2">15+</div>
-                <div className="text-blue-100 font-medium text-sm">Months Experience</div>
-              </div>
-              <div className="text-center">
-                <div className="text-3xl font-bold mb-2">8+</div>
-                <div className="text-blue-100 font-medium text-sm">Technologies Used</div>
-              </div>
-              <div className="text-center">
-                <div className="text-3xl font-bold mb-2">100%</div>
-                <div className="text-blue-100 font-medium text-sm">Success Rate</div>
-              </div>
-            </div>
+          <div className="card p-6 text-center">
+            <div className="text-3xl font-bold text-blue-600 mb-2">6</div>
+            <div className="text-gray-600 font-medium text-sm">Total Projects</div>
+          </div>
+          <div className="card p-6 text-center">
+            <div className="text-3xl font-bold text-blue-600 mb-2">3</div>
+            <div className="text-gray-600 font-medium text-sm">Ongoing Projects</div>
+          </div>
+          <div className="card p-6 text-center">
+            <div className="text-3xl font-bold text-blue-600 mb-2">8+</div>
+            <div className="text-gray-600 font-medium text-sm">Technologies Used</div>
+          </div>
+          <div className="card p-6 text-center">
+            <div className="text-3xl font-bold text-blue-600 mb-2">2024</div>
+            <div className="text-gray-600 font-medium text-sm">Active Year</div>
           </div>
         </motion.div>
       </div>

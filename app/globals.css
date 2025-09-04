@@ -116,6 +116,14 @@
   .section {
     @apply py-16 sm:py-20 lg:py-24;
   }
+  
+  .section-light {
+    @apply bg-white dark:bg-gray-900;
+  }
+  
+  .section-gray {
+    @apply bg-gray-50 dark:bg-gray-800;
+  }
 
   .container {
     @apply max-w-7xl mx-auto px-4 sm:px-6 lg:px-8;
@@ -248,16 +256,15 @@
 }
 
 ::-webkit-scrollbar-track {
-  background: #f1f5f9;
+  @apply bg-gray-100 dark:bg-gray-800;
 }
 
 ::-webkit-scrollbar-thumb {
-  background: #3b82f6;
-  border-radius: 4px;
+  @apply bg-blue-600 dark:bg-blue-500 rounded;
 }
 
 ::-webkit-scrollbar-thumb:hover {
-  background: #2563eb;
+  @apply bg-blue-700 dark:bg-blue-400;
 }
 
 /* Focus Styles */
