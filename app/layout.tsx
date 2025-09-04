@@ -104,7 +104,7 @@ export default function RootLayout({
           "telephone": "+977-9811272899",
           "address": {
             "@type": "PostalAddress",
-            "addressLocality": "Birgunj",
+            "addressLocality": "Kathmandu",
             "addressRegion": "Province No. 2",
             "addressCountry": "NP"
           },

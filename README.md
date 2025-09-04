@@ -242,7 +242,7 @@ npm run lint         # Run ESLint
 For support or questions:
 - **Email**: adarsh.mandal.143@gmail.com
 - **Phone**: +977 9811272899
-- **Location**: Birgunj, Nepal
+- **Location**: Kathmandu, Nepal
 
 ## 📄 License
 

@@ -289,7 +289,7 @@ const Hero = () => {
                 </div>
                 <div className="min-w-0">
                   <div className="text-xs text-gray-500 uppercase tracking-wide">Location</div>
-                  <div className="text-sm font-medium text-gray-800">Birgunj, Nepal</div>
+                  <div className="text-sm font-medium text-gray-800">Kathmandu, Nepal</div>
                 </div>
               </motion.div>
 
